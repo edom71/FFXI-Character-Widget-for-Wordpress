@@ -709,7 +709,7 @@ function widget_ffxi() {
 				<td class="ffxi-value">'. $evil .'</td>
 			</tr>
 			<tr>
-				<td class="ffxi-item" width="50%">AMK</td>
+				<td class="ffxi-item" width="50%">ASA</td>
 				<td width="5%">&nbsp;</td>
 				<td class="ffxi-value">'. $shan .'</td>
 			</tr>
