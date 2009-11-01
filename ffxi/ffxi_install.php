@@ -22,28 +22,28 @@ function ffxiplug_install() {
 	global $wpdb, $wp_version;
 	global $ffxi_db_version;
 	global $user_identity;
-	
+
 	# Database Version - Change on any updates
-	$ffxi_db_version = "3.0";
-	
+	$ffxi_db_version = "3.1";
+
 	get_currentuserinfo();
-	
+
 	add_option('ffxi_db_version', $ffxi_db_version);
-	
+
 	# Check for capability
 	if ( !current_user_can('activate_plugins') )
 		return;
-		
+
 	# Set capabilities for the admin
 	$role = get_role('administrator');
 	$role->add_cap('Change FFXI Stats');
-	
+
 	# Upgrade function changed in WP 2.3
 	if (version_compare($wp_version, '2.3-beta', '>='))
 		require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 	else
 		require_once(ABSPATH . 'wp-admin/upgrade-functions.php');
-	
+
 	$ffxistats = $wpdb->prefix.'ffxistats';
 	$ffxistats_jobs = $wpdb->prefix.'ffxistats_jobs';
 	$ffxistats_ajobs = $wpdb->prefix.'ffxistats_ajobs';
@@ -52,7 +52,7 @@ function ffxiplug_install() {
 	$ffxistats_combat = $wpdb->prefix.'ffxistats_combat';
 	$ffxistats_magic = $wpdb->prefix.'ffxistats_magic';
 	$ffxistats_mission = $wpdb->prefix.'ffxistats_mission';
-	
+
 	if ($wpdb->get_var("SHOW TABLES LIKE '$ffxistats'") != $ffxistats) {
 		$sql = "CREATE TABLE " . $ffxistats . " (
 			id int(11) NOT NULL default '0',
@@ -65,9 +65,9 @@ function ffxiplug_install() {
 			linkshell varchar(200) NOT NULL default '',
 			PRIMARY KEY id (id)
 			) TYPE=MyISAM;";
-	  	
+
 	  	dbDelta($sql);
-		
+
 		# Insert default values to ffxistats database table
 		$chname = "$user_identity";
 		$server = "Asura";
@@ -76,16 +76,16 @@ function ffxiplug_install() {
 		$sex = "Male";
 		$rank = 1;
 		$ls = "";
-		
+
 		$insert = "INSERT INTO " . $ffxistats .
 			" (chname, server, nation, race, sex, rank, linkshell) " .
 			"VALUES ('". $wpdb->escape($chname) ."', '". $wpdb->escape($server) ."', '". $wpdb->escape($nation) ."', '". $wpdb->escape($race) ."', '". $wpdb->escape($sex) ."', '". $wpdb->escape($rank) ."', '". $wpdb->escape($ls) ."')";
-		
+
 		$results = $wpdb->query($insert);
 		ffxi_default_options();
-		add_option("ffxi_db_version", $ffxi_db_version);		
+		add_option("ffxi_db_version", $ffxi_db_version);
 	}
-	
+
 	if  ($wpdb->get_var("SHOW TABLES LIKE '$ffxistats_jobs'") != $ffxistats_jobs) {
 		$sql = "CREATE TABLE " . $ffxistats_jobs . "(
 			id int(11) NOT NULL default '0',
@@ -97,20 +97,20 @@ function ffxiplug_install() {
 			thflvl int(11) NOT NULL default '1',
 			PRIMARY KEY id (id)
 			) TYPE=MyISAM;";
-			
+
 		  dbDelta($sql);
-		  
+
 		  # Insert default values into ffxistats_jobs database table
 		  $one = 1;
 		  $zero = 0;
-		  
+
 		  $insert = "INSERT INTO " . $ffxistats_jobs .
 		  	" (warlvl, whmlvl, rdmlvl, mnklvl, blmlvl, thflvl) " .
 			"VALUES ('". $one ."', '". $one ."', '". $one ."', '". $one ."', '". $one ."', '". $one ."')";
-		
+
 		$result = $wpdb->query($insert);
 	}
-	
+
 	if  ($wpdb->get_var("SHOW TABLES LIKE '$ffxistats_ajobs'") != $ffxistats_ajobs) {
 		$sql = "CREATE TABLE " . $ffxistats_ajobs . "(
 			id int(11) NOT NULL default '0',
@@ -130,9 +130,9 @@ function ffxiplug_install() {
 			schlvl int(11) NOT NULL default '0',
 			PRIMARY KEY id (id)
 			) TYPE=MyISAM;";
-			
+
 		  dbDelta($sql);
-		  
+
 		  # Insert default values into ffxistats_jobs database table
 		  $one = 1;
 		  $zero = 0;
@@ -140,10 +140,10 @@ function ffxiplug_install() {
 		  $insert = "INSERT INTO " . $ffxistats_ajobs .
 		  	" (pldlvl, drklvl, bstlvl, brdlvl, rnglvl, smnlvl, samlvl, ninlvl, drglvl, blulvl, corlvl, puplvl, dnclvl, schlvl) " .
 			"VALUES ('". $zero ."', '". $zero ."', '". $zero ."', '". $zero ."', '". $zero ."', '". $zero ."', '". $zero ."', '". $zero ."', '". $zero ."', '". $zero ."', '". $zero ."', '". $zero ."', '". $zero ."', '". $zero ."')";
-		
+
 		$result = $wpdb->query($insert);
-	}	
-	
+	}
+
 	if ($wpdb->get_var("SHOW TABLES LIKE '$ffxistats_craft'") != $ffxistats_craft) {
 		$sql = "CREATE TABLE " . $ffxistats_craft . "(
 			id int(11) NOT NULL default '0',  
@@ -167,20 +167,20 @@ function ffxiplug_install() {
 			wood_lvl int(11) NOT NULL default '0',
 			PRIMARY KEY id (id)
 			) TYPE=MyISAM;";
-			
+
 		  dbDelta($sql);
-		  
+
 		  # Insert default values into ffxistats_craft database table
 		  $rnk = "Amateur";
 		  $lvl = 0;
-		  
+
 		  $insert = "INSERT INTO " . $ffxistats_craft .
 		  	" (alch_rnk, alch_lvl, bsmith_rnk, bsmith_lvl, bone_rnk, bone_lvl, cloth_rnk, cloth_lvl, cook_rnk, cook_lvl, fish_rnk, fish_lvl, gsmith_rnk, gsmith_lvl, lthr_rnk, lthr_lvl, wood_rnk, wood_lvl) " .
 			"VALUES('". $wpdb->escape($rnk) ."', '". $lvl ."', '". $wpdb->escape($rnk) ."', '". $lvl ."', '". $wpdb->escape($rnk) ."', '". $lvl ."', '". $wpdb->escape($rnk) ."', '". $lvl ."', '". $wpdb->escape($rnk) ."', '". $lvl ."', '". $wpdb->escape($rnk) ."', '". $lvl ."', '". $wpdb->escape($rnk) ."', '". $lvl ."', '". $wpdb->escape($rnk) ."', '". $lvl ."', '". $wpdb->escape($rnk) ."', '". $lvl ."')";
-		
+
 		$result = $wpdb->query($insert);
 	}
-	
+
 	if ($wpdb->get_var("SHOW TABLES LIKE '$ffxistats_weapon'") != $ffxistats_weapon) {
 		$sql = "CREATE TABLE " . $ffxistats_weapon . "(
 			id int(11) NOT NULL default '0',
@@ -200,19 +200,19 @@ function ffxiplug_install() {
 			swd_ws varchar(200) NOT NULL default '',
 			PRIMARY KEY id (id)
 			) TYPE=MyISAM;";
-			
+
 		dbDelta($sql);
-		
+
 		# Insert default values into ffxistats_weapon database table
 		$blnk = "";
-		
+
 		$insert = "INSERT INTO " . $ffxistats_weapon .
 			" (arch_ws, axe_ws, club_ws, dagger_ws, graxe_ws, grkat_ws, grswd_ws, h2h_ws, kat_ws, mark_ws, pole_ws, scythe_ws, staff_ws, swd_ws) " .
 			"VALUES('". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."')";
-		
+
 		$result = $wpdb->query($insert);	
 	}
-	
+
 	if ($wpdb->get_var("SHOW TABLES LIKE '$ffxistats_combat'") != $ffxistats_combat) {
 		$sql = "CREATE TABLE " . $ffxistats_combat . "(
 			id int(11) NOT NULL default '0',
@@ -237,16 +237,16 @@ function ffxiplug_install() {
 			throw_lvl int(11) NOT NULL default '0',
 			PRIMARY KEY id (id)
 			) TYPE=MyISAM;";
-			
+
 		dbDelta($sql);
-		
+
 		# Insert default values into ffxistats_combat database table
 		$null = 0;
-		
+
 		$insert = "INSERT INTO " . $ffxistats_combat .
 			" (arch_lvl, axe_lvl, club_lvl, dagger_lvl, evasion_lvl, graxe_lvl, grkat_lvl, grswd_lvl, guard_lvl, h2h_lvl, kat_lvl, mark_lvl, parry_lvl, pole_lvl, scythe_lvl, shield_lvl, staff_lvl, sword_lvl, throw_lvl) " .
 			"VALUES('". $null ."', '". $null ."', '". $null ."', '". $null ."', '". $null ."', '". $null ."', '". $null ."', '". $null ."', '". $null ."', '". $null ."', '". $null ."', '". $null ."', '". $null ."', '". $null ."', '". $null ."', '". $null ."', '". $null ."', '". $null ."', '". $null ."')";
-		
+
 		$result = $wpdb->query($insert);
 	}
 
@@ -264,19 +264,19 @@ function ffxiplug_install() {
 			blue int(11) NOT NULL default '0',
 			PRIMARY KEY id (id)
 			) TYPE=MyISAM;";
-			
+
 		dbDelta($sql);
-		
+
 		# Insert default values into ffxistats_magic database table
 		$null = 0;
-		
+
 		$insert = "INSERT INTO " . $ffxistats_magic .
 			" (dark, divine, elemental, enfeebling, enhancing, healing, ninjutsu, summoning, blue) " .
 			"VALUES('". $null ."', '". $null ."', '". $null ."', '". $null ."', '". $null ."', '". $null ."', '". $null ."', '". $null ."', '". $null ."')";
-		
+
 		$result = $wpdb->query($insert);
 	}
-	
+
 	if ($wpdb->get_var("SHOW TABLES LIKE '$ffxistats_mission'") != $ffxistats_mission) {
 		$sql = "CREATE TABLE " . $ffxistats_mission . "(
 			id int(11) NOT NULL default '0',
@@ -289,28 +289,29 @@ function ffxiplug_install() {
 			altana varchar(200) NOT NULL default '',
 			crystalline varchar(200) NOT NULL default '',
 			evilsmalldose varchar(200) NOT NULL default '',
+			shantotto varchar(200) NOT NULL default '',
 			PRIMARY KEY id (id)
 			) TYPE=MyISAM;";
-		
+
 		dbDelta($sql);
-		
+
 		# Insert default values into ffxistats_mission database table
 		$blnk = "";
-		
+
 		$insert = "INSERT INTO " . $ffxistats_mission .
-			" (bastok, windy, sandy, zilart, promathia, ahturhgan, altana, crystalline, evilsmalldose) " .
-			"VALUES('". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."')";
-		
+			" (bastok, windy, sandy, zilart, promathia, ahturhgan, altana, crystalline, evilsmalldose, shantotto) " .
+			"VALUES('". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."')";
+
 		$result = $wpdb->query($insert);
 	}
-	
+
 	# Check db Version
 	$installed_ver = get_option("ffxi_db_version");
 	if ($installed_ver != $ffxi_db_version) {
 		# Any updates to plugin go here
-		$wpdb->query("ALTER TABLE ".$ffxistats_mission." ADD evilsmalldose varchar(200) NOT NULL default ''" );
+		$wpdb->query("ALTER TABLE ".$ffxistats_mission." ADD shantotto varchar(200) NOT NULL default ''" );
 		update_option("ffxi_db_version", $ffxi_db_version);
-	}	
+	}
 }
 
 function ffxi_default_options() {
@@ -322,7 +323,7 @@ function ffxi_default_options() {
 	$ffxi_options['showcom'] = true;
 	$ffxi_options['showmag'] = true;
 	$ffxi_options['showmis'] = true;
-	
+
 	update_option('ffxi_options', $ffxi_options);
 }
 

@@ -45,7 +45,7 @@ function add_ffxi_menu() {
 	add_submenu_page(FFXIFOLDER, 'Mission Stats', 'Mission Stats', 'Change FFXI Stats', 'mission-stats', 'show_ffxi_menu');
 	
 	# Submenu - Setup
-	// add_submenu_page(FFXIFOLDER, 'Setup', 'Setup', 'Change FFXI Stats', 'setup', 'show_ffxi_menu');	
+	// add_submenu_page(FFXIFOLDER, 'Setup', 'Setup', 'Change FFXI Stats', 'setup', 'show_ffxi_menu');
 }
 
 function show_ffxi_menu() {

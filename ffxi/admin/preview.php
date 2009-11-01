@@ -24,10 +24,10 @@ if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF'])) { die('You 
 
 function ffxi_preview() {
 	global $wpdb;
-	
+
 	// ini_set('error_reporting', E_ALL);
 	$ffxi_options=get_option('ffxi_options');
-	
+
 	if (isset($_POST['updateopt'])) {
 		check_admin_referer('ffxi_show');
 		if ($_POST['page_options'])
@@ -39,13 +39,13 @@ function ffxi_preview() {
 				$ffxi_options[$option] = $value;
 			}
 		}
-		
+
 		update_option('ffxi_options', $ffxi_options);
 		$messagetext = '<font color="green">Update Successful</font>';
 	}
-	
+
 	if (!empty($messagetext)) { echo '<!-- Last Action --><div id="message" class="updated fade"><p>'.$messagetext.'</p></div>'; }
-	
+
 	# Retrieve Values from database tables
 	$profilelist = $wpdb->get_results("SELECT * FROM $wpdb->ffxistats WHERE id=0"); // Profile Info
 	foreach($profilelist as $profile) {
@@ -164,13 +164,16 @@ function ffxi_preview() {
 		$cop = $mission->promathia;
 		$toau = $mission->ahturhgan;
 		$wog = $mission->altana;
+		$crys = $mission->crystalline;
+		$evil = $mission->evilsmalldose;
+		$shan = $mission->shantotto;
 	}
 	
 	?>
-    <link type="text/css" rel="stylesheet" href="<?php echo FFXI_URLPATH ?>ffxi.css" media="screen" />
-    
-    <h2><?php echo "".$chname."'s"; ?> Stats Preview</h2>
-    <div class="wrap">
+	<link type="text/css" rel="stylesheet" href="<?php echo FFXI_URLPATH ?>ffxi.css" media="screen" />
+
+	<h2><?php echo "".$chname."'s"; ?> Stats Preview</h2>
+	<div class="wrap">
 			<div style="float:right">
 			<div class="wrap">
 				<div id="showset">
@@ -213,7 +216,7 @@ function ffxi_preview() {
 								<tr valign="top">
 									<td align="left">Show Missions</td>
 									<td><input type="checkbox" name="showmis" value="1" <?php checked('1', $ffxi_options[showmis]); ?> /></td>
-								</tr>																																								
+								</tr>
 							</table>
 							<div class="submit"><input type="submit" name="updateopt" value="Update &raquo;" /></div>
 						</fieldset>
@@ -221,19 +224,19 @@ function ffxi_preview() {
 				</div>
 			</div>
 		</div>
-        <div style="width: 175px;">
+		<div style="width: 175px;">
 			<?php 
 			if(!$ffxi_options[showpro])  
 				echo "<div class='ffxi-sec' style='display: none;'>";
 			else
 				echo "<div class='ffxi-sec'>";
 			?>
-                <table border='0' cellpadding='0' cellspacing='0' width='100%'>
-                    <tr>
-                        <td>
-                            <div class="ffxi-cap">Profile</div>
-                        </td>
-                    </tr>
+				<table border='0' cellpadding='0' cellspacing='0' width='100%'>
+					<tr>
+						<td>
+							<div class="ffxi-cap">Profile</div>
+						</td>
+					</tr>
                 </table>
                 <table border='0' cellpadding='0' cellspacing='0' width='100%'>
                     <tr>
@@ -265,7 +268,7 @@ function ffxi_preview() {
                         <td class="ffxi-item" width="50%">Linkshell</td>
                         <td width="5%">&nbsp;</td>
                         <td class="ffxi-value" width="45%"><?php echo $ls; ?></td>
-                    </tr>                                                                                
+                    </tr>
                 </table>
             </div>
 			<?php 
@@ -296,7 +299,7 @@ function ffxi_preview() {
                         <td class="ffxi-item" width="50%">Red Mage</td>
                         <td width="5%">&nbsp;</td>
                         <td class="ffxi-value" width="45%"><?php echo $rdm; ?></td>
-                    </tr>                
+                    </tr>
                     <tr>
                         <td class="ffxi-item" width="50%">Monk</td>
                         <td width="5%">&nbsp;</td>
@@ -311,8 +314,8 @@ function ffxi_preview() {
                         <td class="ffxi-item" width="50%">Thief</td>
                         <td width="5%">&nbsp;</td>
                         <td class="ffxi-value" width="45%"><?php echo $thf; ?></td>
-                    </tr>                                                                                
-                </table>        
+                    </tr>
+                </table>
             </div>
 			<?php 
 			if(!$ffxi_options[showajob])  
@@ -375,7 +378,7 @@ function ffxi_preview() {
 									echo "-";
 							?>
                         </td>
-                    </tr>                    
+                    </tr>
                     <tr>
                         <td class="ffxi-item" width="50%">Ranger</td>
                         <td width="5%">&nbsp;</td>
@@ -387,7 +390,7 @@ function ffxi_preview() {
 									echo "-";
 							?>
                         </td>
-                    </tr>                    
+                    </tr>
                     <tr>
                         <td class="ffxi-item" width="50%">Summoner</td>
                         <td width="5%">&nbsp;</td>
@@ -399,7 +402,7 @@ function ffxi_preview() {
 									echo "-";
 							?>
                         </td>
-                    </tr>                    
+                    </tr>
                     <tr>
                         <td class="ffxi-item" width="50%">Samurai</td>
                         <td width="5%">&nbsp;</td>
@@ -411,7 +414,7 @@ function ffxi_preview() {
 									echo "-";
 							?>
                         </td>
-                    </tr>                    
+                    </tr>
                     <tr>
                         <td class="ffxi-item" width="50%">Ninja</td>
                         <td width="5%">&nbsp;</td>
@@ -423,7 +426,7 @@ function ffxi_preview() {
 									echo "-";
 							?>
                         </td>
-                    </tr>                    
+                    </tr>
                     <tr>
                         <td class="ffxi-item" width="50%">Dragoon</td>
                         <td width="5%">&nbsp;</td>
@@ -435,7 +438,7 @@ function ffxi_preview() {
 									echo "-";
 							?>
                         </td>
-                    </tr>                    
+                    </tr>
                     <tr>
                         <td class="ffxi-item" width="50%">Blue Mage</td>
                         <td width="5%">&nbsp;</td>
@@ -447,7 +450,7 @@ function ffxi_preview() {
 									echo "-";
 							?>
                         </td>
-                    </tr>                    
+                    </tr>
                     <tr>
                         <td class="ffxi-item" width="50%">Corsair</td>
                         <td width="5%">&nbsp;</td>
@@ -459,7 +462,7 @@ function ffxi_preview() {
 									echo "-";
 							?>
                         </td>
-                    </tr>                    
+                    </tr>
                     <tr>
                         <td class="ffxi-item" width="50%">Puppetmaster</td>
                         <td width="5%">&nbsp;</td>
@@ -471,7 +474,7 @@ function ffxi_preview() {
 									echo "-";
 							?>
                         </td>
-                    </tr>                    
+                    </tr>
                     <tr>
                         <td class="ffxi-item" width="50%">Dancer</td>
                         <td width="5%">&nbsp;</td>
@@ -483,7 +486,7 @@ function ffxi_preview() {
 									echo "-";
 							?>
                         </td>
-                    </tr>                    
+                    </tr>
                     <tr>
                         <td class="ffxi-item" width="50%">Scholar</td>
                         <td width="5%">&nbsp;</td>
@@ -496,7 +499,7 @@ function ffxi_preview() {
 							?>
                         </td>
                     </tr>
-                </table>                            	
+                </table>
             </div>
 			<?php 
 			if(!$ffxi_options[showcraft])  
@@ -650,8 +653,8 @@ function ffxi_preview() {
                     	<td class="ffxi-item" width="50%">Sword</td>
                         <td width="5%">&nbsp;</td>
                         <td class="ffxi-value" width="45%"><?php echo $swdws; ?></td>
-                    </tr>										
-                </table>            	
+                    </tr>
+                </table>
             </div>
 			<?php 
 			if(!$ffxi_options[showcom])  
@@ -761,8 +764,8 @@ function ffxi_preview() {
                     	<td class="ffxi-item" width="50%">Throwing</td>
                         <td width="5%">&nbsp;</td>
                         <td class="ffxi-value" width="45%"><?php echo $throw; ?></td>
-                    </tr>																																																																																														
-				</table>				
+                    </tr>
+				</table>
 			</div>
 			<?php 
 			if(!$ffxi_options[showmag])  
@@ -823,7 +826,7 @@ function ffxi_preview() {
 						<td width="5%">&nbsp;</td>
 						<td class="ffxi-value" width="45%"><?php echo $blue; ?></td>
 					</tr>
-				</table>			
+				</table>
 			</div>
 			<?php 
 			if(!$ffxi_options[showmis])  
@@ -873,11 +876,26 @@ function ffxi_preview() {
 						<td class="ffxi-item" width="50%">WotG</td>
 						<td width="5%">&nbsp;</td>
 						<td class="ffxi-value"><?php echo $wog; ?></td>
-					</tr>																														
-				</table>			
+					</tr>
+					<tr>
+						<td class="ffxi-item" width="50%">ACP</td>
+						<td width="5%">&nbsp;</td>
+						<td class="ffxi-value"><?php echo $crys; ?></td>
+					</tr>
+					<tr>
+						<td class="ffxi-item" width="50%">AMK</td>
+						<td width="5%">&nbsp;</td>
+						<td class="ffxi-value"><?php echo $evil; ?></td>
+					</tr>
+					<tr>
+						<td class="ffxi-item" width="50%">ASA</td>
+						<td width="5%">&nbsp;</td>
+						<td class="ffxi-value"><?php echo $shan; ?></td>
+					</tr>
+				</table>
 			</div>
         </div>
     </div>
-<?php	
+<?php
 }
 ?>

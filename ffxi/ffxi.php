@@ -2,7 +2,7 @@
 /*
 Plugin Name: FFXI Character Stats for Wordpress
 Description: Add a display menu for your stats.
-Version: 3.0
+Version: 3.1
 Author: Demonicpagan
 Author URI: http://trials.stelth2000inc.com
 */
@@ -31,7 +31,7 @@ global $wpdb, $wp_version;
 // ini_set('error_reporting', E_ALL);
 
 # Version
-$ffxi_db_version = "3.0";
+$ffxi_db_version = "3.1";
 
 # Define URL
 $myabspath = str_replace("\\","/",ABSPATH);  // required for Windows & XAMPP

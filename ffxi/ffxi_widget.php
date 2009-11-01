@@ -2,7 +2,7 @@
 /*
 Plugin Name: FFXI Character Stats Widget
 Description: A sidebar widget for your stats.
-Version: 3.0
+Version: 3.1
 Author: Demonicpagan
 Author URI: http://trials.stelth2000inc.com
 */
@@ -198,6 +198,7 @@ function widget_ffxi() {
 			$wog = $mission->altana;
 			$crys = $mission->crystalline;
 			$evil = $mission->evilsmalldose;
+			$shan = $mission->shantotto;
 		}
 		
 		$title = $chname . "'s Stats";
@@ -706,6 +707,11 @@ function widget_ffxi() {
 				<td class="ffxi-item" width="50%">AMK</td>
 				<td width="5%">&nbsp;</td>
 				<td class="ffxi-value">'. $evil .'</td>
+			</tr>
+			<tr>
+				<td class="ffxi-item" width="50%">AMK</td>
+				<td width="5%">&nbsp;</td>
+				<td class="ffxi-value">'. $shan .'</td>
 			</tr>
 		</table></div>';
 		

@@ -20,7 +20,7 @@ if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF'])) { die('You 
 
 function ffxi_mission_stats() {
 	global $wpdb;
-	
+
 	# Get database info
 	$missionlist = $wpdb->get_results("SELECT * FROM $wpdb->ffxistats_mission WHERE id=0"); // Mission Info
 	foreach($missionlist as $mission) {
@@ -33,11 +33,12 @@ function ffxi_mission_stats() {
 		$wog = $mission->altana;
 		$crys = $mission->crystalline;
 		$evil = $mission->evilsmalldose;
+		$shan = $mission->shantotto;
 	}
-	
+
 	if ( isset($_POST['updateopt']) ) {
 		check_admin_referer('ffxi_mission_stats');
-		
+
 		$bas = attribute_escape($_POST[bastok]);
 		$wind = attribute_escape($_POST[windy]);
 		$sand = attribute_escape($_POST[sandy]);
@@ -47,7 +48,8 @@ function ffxi_mission_stats() {
 		$wog = attribute_escape($_POST[altana]);
 		$crys = attribute_escape($_POST[crystalline]);
 		$evil = attribute_escape($_POST['evilsmalldose']);
-		
+		$shan = attribute_escape($_POST['shantotto']);
+
 		$result = $wpdb->query("UPDATE $wpdb->ffxistats_mission SET bastok='$bas', windy='$wind', sandy='$sand', zilart='$zil', promathia='$cop', ahturhgan='$toau', altana='$wog', crystalline='$crys', evilsmalldose='$evil'");
 
 		$messagetext = '<font color="green">Missions updated successfully.</font>';
@@ -96,6 +98,10 @@ function ffxi_mission_stats() {
                         <tr valign="top">
                             <th align="left">Moogle Kupo d'Etat</th>
                             <td><input type="text" size="45" maxlength="45" name="evilsmalldose" value="<?php echo $evil; ?>" /></td>
+                        </tr>
+                        <tr valign="top">
+                            <th align="left">A Shantotto Ascension</th>
+                            <td><input type="text" size="45" maxlength="45" name="shantotto" value="<?php echo $shan; ?>" /></td>
                         </tr>
                     </table>
                     <div class="submit">
