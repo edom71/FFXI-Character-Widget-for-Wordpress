@@ -50,7 +50,7 @@ function ffxi_mission_stats() {
 		$evil = attribute_escape($_POST['evilsmalldose']);
 		$shan = attribute_escape($_POST['shantotto']);
 
-		$result = $wpdb->query("UPDATE $wpdb->ffxistats_mission SET bastok='$bas', windy='$wind', sandy='$sand', zilart='$zil', promathia='$cop', ahturhgan='$toau', altana='$wog', crystalline='$crys', evilsmalldose='$evil'");
+		$result = $wpdb->query("UPDATE $wpdb->ffxistats_mission SET bastok='$bas', windy='$wind', sandy='$sand', zilart='$zil', promathia='$cop', ahturhgan='$toau', altana='$wog', crystalline='$crys', evilsmalldose='$evil', shantotto='$shan'");
 
 		$messagetext = '<font color="green">Missions updated successfully.</font>';
 	}
