@@ -1,0 +1,37 @@
+@charset "utf-8";
+/* CSS Document */
+
+.ffxi-sec {
+	border-style: ridge;
+	border-width: 4px;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 10px 0px;
+	background-color: #CCC;
+	text-align: center;
+}
+
+.ffxi-cap {
+	border-style: outset;
+	border-width: 2px;
+	padding: 0px 0px 0px 5px;
+	margin: 0px 0px 8px 0px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-weight: bold;
+	color: #000;
+	text-align: left;
+}
+
+.ffxi-item {
+	font-family: "Times New Roman", Times, serif;
+	font-size:10px;
+	font-weight: normal;
+	color: #000;
+}
+
+.ffxi-value {
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 10px;
+	font-weight: normal;
+	color: #700;
+}
