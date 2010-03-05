@@ -18,6 +18,15 @@
 
 if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF'])) { die('You are not allowed to call this page directly.'); }
 
+function ffxi_job_stats_header() {
+?>
+	<script type="text/javascript" src="<?php echo FFXI_URLPATH ?>/scripts/prototype.js"></script>
+	<script type="text/javascript" src="<?php echo FFXI_URLPATH ?>/scripts/validation.js"></script>
+	<script type="text/javascript" src="<?php echo FFXI_URLPATH ?>/scripts/effects.js"></script>
+<?php
+}
+add_action('admin_header', 'ffxi_job_stats_header');
+
 function ffxi_job_stats() {
 	global $wpdb;
 	
@@ -78,12 +87,17 @@ function ffxi_job_stats() {
 
 		$messagetext = '<font color="green">Jobs updated successfully.</font>';
 	}
-	if (!empty($messagetext)) { echo '<!-- Last Action --><div id="message" class="updated fade"><p>'.$messagetext.'</p></div>'; }
+
+	if (!empty($messagetext))
+	{
+		echo '<!-- Last Action --><div id="message" class="updated fade"><p>'.$messagetext.'</p></div>';
+	}
+
 	?>
     <div class="wrap">
         <div id="jobinfo">
             <h2>Job Levels</h2>
-            <form name="joblevels" method="post">
+            <form name="joblevels" method="post" name="jobs" id="jobs">
                 <?php wp_nonce_field('ffxi_job_stats'); ?>
                 <fieldset class="options">
                     <table class="optiontable editform">
@@ -91,7 +105,7 @@ function ffxi_job_stats() {
                             <th align="left">Warrior</th>
                             <td><input type="text" size="3" maxlength="3" name="war" value="<?php echo $war; ?>" /></td>
                             <th align="left">Ranger</th>
-                            <td><input type="text" size="3" maxlength="3" name="rng" value="<?php echo $rng; ?>" /></td>						
+                            <td><input type="text" size="3" maxlength="3" name="rng" value="<?php echo $rng; ?>" /></td>
                         </tr>
                         <tr valign="top">
                             <th align="left">White Mage</th>
@@ -109,50 +123,53 @@ function ffxi_job_stats() {
                             <th align="left">Monk</th>
                             <td><input type="text" size="3" maxlength="3" name="mnk" value="<?php echo $mnk; ?>" /></td>
                             <th align="left">Ninja</th>
-                            <td><input type="text" size="3" maxlength="3" name="nin" value="<?php echo $nin; ?>" /></td>					
+                            <td><input type="text" size="3" maxlength="3" name="nin" value="<?php echo $nin; ?>" /></td>
                         </tr>
                         <tr valign="top">
                             <th align="left">Black Mage</th>
                             <td><input type="text" size="3" maxlength="3" name="blm" value="<?php echo $blm; ?>" /></td>
                             <th align="left">Dragoon</th>
-                            <td><input type="text" size="3" maxlength="3" name="drg" value="<?php echo $drg; ?>" /></td>					
+                            <td><input type="text" size="3" maxlength="3" name="drg" value="<?php echo $drg; ?>" /></td>
                         </tr>
                         <tr valign="top">
                             <th align="left">Thief</th>
                             <td><input type="text" size="3" maxlength="3" name="thf" value="<?php echo $thf; ?>" /></td>
                             <th align="left">Blue Mage</th>
-                            <td><input type="text" size="3" maxlength="3" name="blu" value="<?php echo $blu; ?>" /></td>					
+                            <td><input type="text" size="3" maxlength="3" name="blu" value="<?php echo $blu; ?>" /></td>
                         </tr>
                         <tr valign="top">
                             <th align="left">Paladin</th>
                             <td><input type="text" size="3" maxlength="3" name="pld" value="<?php echo $pld; ?>" /></td>
                             <th align="left">Corsair</th>
-                            <td><input type="text" size="3" maxlength="3" name="cor" value="<?php echo $cor; ?>" /></td>					
+                            <td><input type="text" size="3" maxlength="3" name="cor" value="<?php echo $cor; ?>" /></td>
                         </tr>
                         <tr valign="top">
                             <th align="left">Dark Knight</th>
                             <td><input type="text" size="3" maxlength="3" name="drk" value="<?php echo $drk; ?>" /></td>
                             <th align="left">Puppetmaster</th>
-                            <td><input type="text" size="3" maxlength="3" name="pup" value="<?php echo $pup; ?>" /></td>					
+                            <td><input type="text" size="3" maxlength="3" name="pup" value="<?php echo $pup; ?>" /></td>
                         </tr>
                         <tr valign="top">
                             <th align="left">Beastmaster</th>
                             <td><input type="text" size="3" maxlength="3" name="bst" value="<?php echo $bst; ?>" /></td>
                             <th align="left">Dancer</th>
-                            <td><input type="text" size="3" maxlength="3" name="dnc" value="<?php echo $dnc; ?>" /></td>					
+                            <td><input type="text" size="3" maxlength="3" name="dnc" value="<?php echo $dnc; ?>" /></td>
                         </tr>
                         <tr valign="top">
                             <th align="left">Bard</th>
                             <td><input type="text" size="3" maxlength="3" name="brd" value="<?php echo $brd; ?>" /></td>
                             <th align="left">Scholar</th>
-                            <td><input type="text" size="3" maxlength="3" name="sch" value="<?php echo $sch; ?>" /></td>					
-                        </tr>																																			
+                            <td><input type="text" size="3" maxlength="3" name="sch" value="<?php echo $sch; ?>" /></td>
+                        </tr>
                     </table>
                     <div class="submit">
                         <input type="submit" name="updateopt" value="Update Stats &raquo;" />
                     </div>
                 </fieldset>
             </form>
+			<script type="text/javascript">
+				var valid = new Validation('jobs', {immediate: true});
+			</script>
         </div>
     </div>
 <?php
