@@ -22,6 +22,13 @@
 
 if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF'])) { die('You are not allowed to call this page directly.'); }
 
+function ffxi_preview_head() {
+?>
+	<link type="text/css" rel="stylesheet" href="<?php echo FFXI_URLPATH ?>ffxi.css" media="screen" />
+<?php
+}
+add_action('admin_head', 'ffxi_preview_head');
+
 function ffxi_preview() {
 	global $wpdb;
 
@@ -170,8 +177,6 @@ function ffxi_preview() {
 	}
 	
 	?>
-	<link type="text/css" rel="stylesheet" href="<?php echo FFXI_URLPATH ?>ffxi.css" media="screen" />
-
 	<h2><?php echo "".$chname."'s"; ?> Stats Preview</h2>
 	<div class="wrap">
 			<div style="float:right">
