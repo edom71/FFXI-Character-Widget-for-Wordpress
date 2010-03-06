@@ -35,3 +35,17 @@
 	font-weight: normal;
 	color: #700;
 }
+
+input.validate-jobs, input.validate-ajobs {
+	border: 1px solid #00A8E6;
+}
+
+input.validation-failed {
+	border: 1px solid #FF3300;
+	color: #FF3300;
+}
+
+input.validation-passed {
+	border: 1px solid #00CC00;
+	color: #000;
+}

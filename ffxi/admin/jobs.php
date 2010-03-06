@@ -20,6 +20,8 @@ if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF'])) { die('You 
 
 function ffxi_job_stats_header() {
 ?>
+	<link type="text/css" rel="stylesheet" href="<?php echo FFXI_URLPATH ?>ffxi.css" media="screen" />
+
 	<script type="text/javascript" src="<?php echo FFXI_URLPATH ?>/scripts/prototype.js"></script>
 	<script type="text/javascript" src="<?php echo FFXI_URLPATH ?>/scripts/validation.js"></script>
 	<script type="text/javascript" src="<?php echo FFXI_URLPATH ?>/scripts/effects.js"></script>
@@ -103,63 +105,63 @@ function ffxi_job_stats() {
                     <table class="optiontable editform">
                         <tr valign="top">
                             <th align="left">Warrior</th>
-                            <td><input type="text" size="3" maxlength="3" name="war" value="<?php echo $war; ?>" /></td>
+                            <td><input class="validate-jobs" type="text" size="3" maxlength="3" name="war" value="<?php echo $war; ?>" /></td>
                             <th align="left">Ranger</th>
-                            <td><input type="text" size="3" maxlength="3" name="rng" value="<?php echo $rng; ?>" /></td>
+                            <td><input class="validate-ajobs" type="text" size="3" maxlength="3" name="rng" value="<?php echo $rng; ?>" /></td>
                         </tr>
                         <tr valign="top">
                             <th align="left">White Mage</th>
-                            <td><input type="text" size="3" maxlength="3" name="whm" value="<?php echo $whm; ?>" /></td>
+                            <td><input class="validate-jobs" type="text" size="3" maxlength="3" name="whm" value="<?php echo $whm; ?>" /></td>
                             <th align="left">Summoner</th>
-                            <td><input type="text" size="3" maxlength="3" name="smn" value="<?php echo $smn; ?>" /></td>
+                            <td><input class="validate-ajobs" type="text" size="3" maxlength="3" name="smn" value="<?php echo $smn; ?>" /></td>
                         </tr>
                         <tr valign="top">
                             <th align="left">Red Mage</th>
-                            <td><input type="text" size="3" maxlength="3" name="rdm" value="<?php echo $rdm; ?>" /></td>
+                            <td><input class="validate-jobs" type="text" size="3" maxlength="3" name="rdm" value="<?php echo $rdm; ?>" /></td>
                             <th align="left">Samurai</th>
-                            <td><input type="text" size="3" maxlength="3" name="sam" value="<?php echo $sam; ?>" /></td>
+                            <td><input class="validate-ajobs" type="text" size="3" maxlength="3" name="sam" value="<?php echo $sam; ?>" /></td>
                         </tr>
                         <tr valign="top">
                             <th align="left">Monk</th>
-                            <td><input type="text" size="3" maxlength="3" name="mnk" value="<?php echo $mnk; ?>" /></td>
+                            <td><input class="validate-jobs" type="text" size="3" maxlength="3" name="mnk" value="<?php echo $mnk; ?>" /></td>
                             <th align="left">Ninja</th>
-                            <td><input type="text" size="3" maxlength="3" name="nin" value="<?php echo $nin; ?>" /></td>
+                            <td><input class="validate-ajobs" type="text" size="3" maxlength="3" name="nin" value="<?php echo $nin; ?>" /></td>
                         </tr>
                         <tr valign="top">
                             <th align="left">Black Mage</th>
-                            <td><input type="text" size="3" maxlength="3" name="blm" value="<?php echo $blm; ?>" /></td>
+                            <td><input class="validate-jobs" type="text" size="3" maxlength="3" name="blm" value="<?php echo $blm; ?>" /></td>
                             <th align="left">Dragoon</th>
-                            <td><input type="text" size="3" maxlength="3" name="drg" value="<?php echo $drg; ?>" /></td>
+                            <td><input class="validate-ajobs" type="text" size="3" maxlength="3" name="drg" value="<?php echo $drg; ?>" /></td>
                         </tr>
                         <tr valign="top">
                             <th align="left">Thief</th>
-                            <td><input type="text" size="3" maxlength="3" name="thf" value="<?php echo $thf; ?>" /></td>
+                            <td><input class="validate-jobs" type="text" size="3" maxlength="3" name="thf" value="<?php echo $thf; ?>" /></td>
                             <th align="left">Blue Mage</th>
-                            <td><input type="text" size="3" maxlength="3" name="blu" value="<?php echo $blu; ?>" /></td>
+                            <td><input class="validate-jobs" type="text" size="3" maxlength="3" name="blu" value="<?php echo $blu; ?>" /></td>
                         </tr>
                         <tr valign="top">
                             <th align="left">Paladin</th>
-                            <td><input type="text" size="3" maxlength="3" name="pld" value="<?php echo $pld; ?>" /></td>
+                            <td><input class="validate-ajobs" type="text" size="3" maxlength="3" name="pld" value="<?php echo $pld; ?>" /></td>
                             <th align="left">Corsair</th>
-                            <td><input type="text" size="3" maxlength="3" name="cor" value="<?php echo $cor; ?>" /></td>
+                            <td><input class="validate-ajobs" type="text" size="3" maxlength="3" name="cor" value="<?php echo $cor; ?>" /></td>
                         </tr>
                         <tr valign="top">
                             <th align="left">Dark Knight</th>
-                            <td><input type="text" size="3" maxlength="3" name="drk" value="<?php echo $drk; ?>" /></td>
+                            <td><input class="validate-ajobs" type="text" size="3" maxlength="3" name="drk" value="<?php echo $drk; ?>" /></td>
                             <th align="left">Puppetmaster</th>
-                            <td><input type="text" size="3" maxlength="3" name="pup" value="<?php echo $pup; ?>" /></td>
+                            <td><input class="validate-ajobs" type="text" size="3" maxlength="3" name="pup" value="<?php echo $pup; ?>" /></td>
                         </tr>
                         <tr valign="top">
                             <th align="left">Beastmaster</th>
-                            <td><input type="text" size="3" maxlength="3" name="bst" value="<?php echo $bst; ?>" /></td>
+                            <td><input class="validate-ajobs" type="text" size="3" maxlength="3" name="bst" value="<?php echo $bst; ?>" /></td>
                             <th align="left">Dancer</th>
-                            <td><input type="text" size="3" maxlength="3" name="dnc" value="<?php echo $dnc; ?>" /></td>
+                            <td><input class="validate-ajobs" type="text" size="3" maxlength="3" name="dnc" value="<?php echo $dnc; ?>" /></td>
                         </tr>
                         <tr valign="top">
                             <th align="left">Bard</th>
-                            <td><input type="text" size="3" maxlength="3" name="brd" value="<?php echo $brd; ?>" /></td>
+                            <td><input class="validate-ajobs" type="text" size="3" maxlength="3" name="brd" value="<?php echo $brd; ?>" /></td>
                             <th align="left">Scholar</th>
-                            <td><input type="text" size="3" maxlength="3" name="sch" value="<?php echo $sch; ?>" /></td>
+                            <td><input class="validate-ajobs" type="text" size="3" maxlength="3" name="sch" value="<?php echo $sch; ?>" /></td>
                         </tr>
                     </table>
                     <div class="submit">
@@ -168,7 +170,17 @@ function ffxi_job_stats() {
                 </fieldset>
             </form>
 			<script type="text/javascript">
-				var valid = new Validation('jobs', {immediate: true});
+				var valid = new Validation('jobs', {immediate: true, onFormValidate: formCallback});
+				Validation.addAllThese([
+					['validate-jobs', 'Please input a job level between 1 and 80. Anything higher is invalid.', {
+						min: 1,
+						max: 80
+					}],
+					['validate-ajobs', 'Please input a job level between 0 and 80. A job level of 0 indicates the job has not yet been unlocked. Inputting anything higher is invalid.', {
+						min: 0,
+						max: 80
+					}]
+				]);
 			</script>
         </div>
     </div>
