@@ -16,18 +16,26 @@
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF'])) { die('You are not allowed to call this page directly.'); }
+if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF']))
+{ 
+	die('You are not allowed to call this page directly.');
+}
 
 function ffxi_job_stats_header() {
-?>
-	<link type="text/css" rel="stylesheet" href="<?php echo FFXI_URLPATH ?>ffxi.css" media="screen" />
 
-	<script type="text/javascript" src="<?php echo FFXI_URLPATH ?>/scripts/prototype.js"></script>
-	<script type="text/javascript" src="<?php echo FFXI_URLPATH ?>/scripts/validation.js"></script>
-	<script type="text/javascript" src="<?php echo FFXI_URLPATH ?>/scripts/effects.js"></script>
+	echo '<link type="text/css" rel="stylesheet" href="'.FFXI_URLPATH.'ffxi.css" media="screen" />';
+	echo '<script type="text/javascript" src="'.FFXI_URLPATH.'/scripts/prototype.js"></script>';
+	echo '<script type="text/javascript" src="'.FFXI_URLPATH.'/scripts/validation.js"></script>';
+	echo '<script type="text/javascript" src="'.FFXI_URLPATH.'/scripts/effects.js"></script>';
+}
+
+function ffxi_job_stats_header2() { ?>
+
+	<!-- testing -->
 <?php
 }
-add_action('admin_header', 'ffxi_job_stats_header');
+add_action('admin_head', 'ffxi_job_stats_header2');
+#add_action('admin_head', 'ffxi_job_stats_header');
 
 function ffxi_job_stats() {
 	global $wpdb;

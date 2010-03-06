@@ -20,12 +20,13 @@
 # Add form/option to hide tables: style="display: none;" gets added to <div class="ffxi-sec">
 ###
 
-if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF'])) { die('You are not allowed to call this page directly.'); }
+if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF']))
+{ 
+	die('You are not allowed to call this page directly.');
+}
 
 function ffxi_preview_head() {
-?>
-	<link type="text/css" rel="stylesheet" href="<?php echo FFXI_URLPATH ?>ffxi.css" media="screen" />
-<?php
+	echo '<link type="text/css" rel="stylesheet" href="'.FFXI_URLPATH.'ffxi.css" media="screen" />';
 }
 add_action('admin_head', 'ffxi_preview_head');
 
@@ -51,7 +52,9 @@ function ffxi_preview() {
 		$messagetext = '<font color="green">Update Successful</font>';
 	}
 
-	if (!empty($messagetext)) { echo '<!-- Last Action --><div id="message" class="updated fade"><p>'.$messagetext.'</p></div>'; }
+	if (!empty($messagetext)) { 
+		echo '<!-- Last Action --><div id="message" class="updated fade"><p>'.$messagetext.'</p></div>';
+	}
 
 	# Retrieve Values from database tables
 	$profilelist = $wpdb->get_results("SELECT * FROM $wpdb->ffxistats WHERE id=0"); // Profile Info
@@ -64,6 +67,7 @@ function ffxi_preview() {
 		$rank = $profile->rank;
 		$ls = $profile->linkshell;
 	}
+
 	$jobslist = $wpdb->get_results("SELECT * FROM $wpdb->ffxistats_jobs WHERE id=0"); // Basic Jobs
 	foreach($jobslist as $job) {
 		$whm = $job->whmlvl;
@@ -73,6 +77,7 @@ function ffxi_preview() {
 		$thf = $job->thflvl;
 		$mnk = $job->mnklvl;
 	}
+
 	$ajobslist = $wpdb->get_results("SELECT * FROM $wpdb->ffxistats_ajobs WHERE id=0"); // Adv. Jobs
 	foreach($ajobslist as $ajob) {
 		$pld = $ajob->pldlvl;
@@ -90,6 +95,7 @@ function ffxi_preview() {
 		$bst = $ajob->bstlvl;
 		$brd = $ajob->brdlvl;
 	}
+
 	$combatlist = $wpdb->get_results("SELECT * FROM $wpdb->ffxistats_combat WHERE id=0"); // Combast Skills
 	foreach($combatlist as $combat) {
 		$arch = $combat->arch_lvl;
@@ -112,6 +118,7 @@ function ffxi_preview() {
 		$sword = $combat->sword_lvl;
 		$throw = $combat->throw_lvl;
 	}
+
 	$craftlist = $wpdb->get_results("SELECT * FROM $wpdb->ffxistats_craft WHERE id=0"); // Crafting Skills
 	foreach($craftlist as $craft){
 		$alrnk = $craft->alch_rnk;
@@ -133,6 +140,7 @@ function ffxi_preview() {
 		$wdrnk = $craft->wood_rnk;
 		$wdlvl = $craft->wood_lvl;
 	}
+
 	$weaponlist = $wpdb->get_results("SELECT * FROM $wpdb->ffxistats_weapon WHERE id=0"); // Weapon Skills
 	foreach($weaponlist as $weapon) {
 		$archws = $weapon->arch_ws;
@@ -150,6 +158,7 @@ function ffxi_preview() {
 		$staffws = $weapon->staff_ws;
 		$swdws = $weapon->swd_ws;
 	}
+
 	$magiclist = $wpdb->get_results("SELECT * FROM $wpdb->ffxistats_magic WHERE id=0"); // Magic Skills
 	foreach($magiclist as $magic) {
 		$dark = $magic->dark;
@@ -162,6 +171,7 @@ function ffxi_preview() {
 		$summ = $magic->summoning;
 		$blue = $magic->blue;
 	}
+
 	$missionlist = $wpdb->get_results("SELECT * FROM $wpdb->ffxistats_mission WHERE id=0"); // Mission Info
 	foreach($missionlist as $mission) {
 		$bas = $mission->bastok;

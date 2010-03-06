@@ -36,27 +36,30 @@ define('FFXI_URLPATH', get_option('siteurl').'/wp-content/plugins/' . FFXIFOLDER
 // ini_set('error_reporting', E_ALL);
 
 # DB Version
+global $db_version;
 $db_version = "4.0";
 
 # Admin Panel
 include_once (dirname (__FILE__)."/admin/ffxi_admin.php");
 require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
+register_activation_hook(__FILE__, 'ffxi_install');
+
+# Database pointers
+$wpdb->ffxistats = $wpdb->prefix.'ffxistats';
+$wpdb->ffxistats_jobs = $wpdb->prefix.'ffxistats_jobs';
+$wpdb->ffxistats_ajobs = $wpdb->prefix.'ffxistats_ajobs';
+$wpdb->ffxistats_craft = $wpdb->prefix.'ffxistats_craft';
+$wpdb->ffxistats_weapon = $wpdb->prefix.'ffxistats_weapon';
+$wpdb->ffxistats_combat = $wpdb->prefix.'ffxistats_combat';
+$wpdb->ffxistats_magic = $wpdb->prefix.'ffxistats_magic';
+$wpdb->ffxistats_mission = $wpdb->prefix.'ffxistats_mission';
+
 function ffxi_install()
 {
 	global $wpdb, $wp_version;
 	global $db_version;
 	global $user_identity;
-
-	# Database pointers
-	$wpdb->ffxistats = $wpdb->prefix.'ffxistats';
-	$wpdb->ffxistats_jobs = $wpdb->prefix.'ffxistats_jobs';
-	$wpdb->ffxistats_ajobs = $wpdb->prefix.'ffxistats_ajobs';
-	$wpdb->ffxistats_craft = $wpdb->prefix.'ffxistats_craft';
-	$wpdb->ffxistats_weapon = $wpdb->prefix.'ffxistats_weapon';
-	$wpdb->ffxistats_combat = $wpdb->prefix.'ffxistats_combat';
-	$wpdb->ffxistats_magic = $wpdb->prefix.'ffxistats_magic';
-	$wpdb->ffxistats_mission = $wpdb->prefix.'ffxistats_mission';
 
 	get_currentuserinfo();
 
@@ -328,6 +331,8 @@ function ffxi_install()
 		$result = $wpdb->query($insert);
 	}
 
+	$ffxi_options = get_option('ffxi_options');
+
 	# Any updates to plugin?
 	$installed_ver = get_option("ffxi_db_version");
 
@@ -359,15 +364,15 @@ function ffxi_default_options() {
 function widget_ffxi() {
 	if ( !function_exists('register_sidebar_widget') )
 		return;
-	
+
 	function widget_ffxi_show($args) {
 		extract($args);
-		
+
 		global $wpdb;
-		
+
 		# Retrive Display Settings
 		$ffxi_options = get_option('ffxi_options');
-		
+
 		# Retrieve Values from database tables
 		$profilelist = $wpdb->get_results("SELECT * FROM $wpdb->ffxistats WHERE id=0"); // Profile Info
 		foreach($profilelist as $profile) {
@@ -379,6 +384,7 @@ function widget_ffxi() {
 			$rank = $profile->rank;
 			$ls = $profile->linkshell;
 		}
+
 		$jobslist = $wpdb->get_results("SELECT * FROM $wpdb->ffxistats_jobs WHERE id=0"); // Basic Jobs
 		foreach($jobslist as $job) {
 			$whm = $job->whmlvl;
@@ -388,6 +394,7 @@ function widget_ffxi() {
 			$thf = $job->thflvl;
 			$mnk = $job->mnklvl;
 		}
+
 		$ajobslist = $wpdb->get_results("SELECT * FROM $wpdb->ffxistats_ajobs WHERE id=0"); // Adv. Jobs
 		foreach($ajobslist as $ajob) {
 			if ($ajob->pldlvl != 0)
@@ -447,6 +454,7 @@ function widget_ffxi() {
 			else
 				$brd = "-";
 		}
+
 		$craftlist = $wpdb->get_results("SELECT * FROM $wpdb->ffxistats_craft WHERE id=0"); // Crafting Skills
 		foreach($craftlist as $craft){
 			$alrnk = $craft->alch_rnk;
@@ -468,6 +476,7 @@ function widget_ffxi() {
 			$wdrnk = $craft->wood_rnk;
 			$wdlvl = $craft->wood_lvl;
 		}
+
 		$weaponlist = $wpdb->get_results("SELECT * FROM $wpdb->ffxistats_weapon WHERE id=0"); // Weapon Skills
 		foreach($weaponlist as $weapon) {
 			$archws = $weapon->arch_ws;
@@ -485,6 +494,7 @@ function widget_ffxi() {
 			$staffws = $weapon->staff_ws;
 			$swdws = $weapon->swd_ws;
 		}
+
 		$combatlist = $wpdb->get_results("SELECT * FROM $wpdb->ffxistats_combat WHERE id=0"); // Combast Skills
 		foreach($combatlist as $combat) {
 			$arch = $combat->arch_lvl;
@@ -507,6 +517,7 @@ function widget_ffxi() {
 			$sword = $combat->sword_lvl;
 			$throw = $combat->throw_lvl;
 		}
+
 		$magiclist = $wpdb->get_results("SELECT * FROM $wpdb->ffxistats_magic WHERE id=0"); // Magic Skills
 		foreach($magiclist as $magic) {
 			$dark = $magic->dark;
@@ -519,6 +530,7 @@ function widget_ffxi() {
 			$summ = $magic->summoning;
 			$blue = $magic->blue;
 		}
+
 		$missionlist = $wpdb->get_results("SELECT * FROM $wpdb->ffxistats_mission WHERE id=0"); // Mission Info
 		foreach($missionlist as $mission) {
 			$bas = $mission->bastok;
@@ -532,12 +544,12 @@ function widget_ffxi() {
 			$evil = $mission->evilsmalldose;
 			$shan = $mission->shantotto;
 		}
-		
+
 		$title = $chname . "'s Stats";
-		
+
 		$showsec = '<div class="ffxi-sec">';
 		$hidesec = '<div class="ffxi-sec" style="display: none;">';
-		
+
 		$protable = '
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
 			<tr>
@@ -576,6 +588,7 @@ function widget_ffxi() {
 				<td class="ffxi-value" width="45%">'. $ls .'</td>
 			</tr>
 		</table></div>';
+
 		$bjobtable = '
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
 			<tr>
@@ -614,6 +627,7 @@ function widget_ffxi() {
 				<td class="ffxi-value" width="45%">'. $thf .'</td>
 			</tr>
 		</table></div>';
+
 		$ajobtable = '
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
 			<tr>
@@ -692,6 +706,7 @@ function widget_ffxi() {
 				<td class="ffxi-value" width="45%">'. $sch .'</td>
 			</tr>
 		</table></div>';
+
 		$crafttable ='
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
 			<tr>
@@ -754,6 +769,7 @@ function widget_ffxi() {
 				<td class="ffxi-value" width="5%">['. $wdlvl .']</td>
 			</tr>
 		</table></div>';
+
 		$wstable ='
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
 			<tr>
@@ -832,6 +848,7 @@ function widget_ffxi() {
 				<td class="ffxi-value" width="45%">'. $swdws .'</td>
 			</tr>
 		</table></div>';
+
 		$comtable = '
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
 			<tr>
@@ -935,6 +952,7 @@ function widget_ffxi() {
 				<td class="ffxi-value" width="45%">'. $throw .'</td>
 			</tr>
 		</table></div>';
+
 		$magtable ='
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
 			<tr>
@@ -988,6 +1006,7 @@ function widget_ffxi() {
 				<td class="ffxi-value" width="45%">'. $blue .'</td>
 			</tr>
 		</table></div>';
+
 		$mistable ='
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
 			<tr>
@@ -1046,7 +1065,7 @@ function widget_ffxi() {
 				<td class="ffxi-value">'. $shan .'</td>
 			</tr>
 		</table></div>';
-		
+
 		echo $before_widget;
 		echo $before_title . $title . $after_title;
 		echo '<div style="width: 175px">';
@@ -1093,14 +1112,15 @@ function widget_ffxi() {
 		echo '</div>';
 		echo $after_widget;
 	}
-	
+
 	register_sidebar_widget('FFXI Stats', 'widget_ffxi_show');
 }
 
 # Add Stylesheet to header
-function ffxi_head() { ?>
-<link type="text/css" rel="stylesheet" href="<?php echo FFXI_URLPATH ?>ffxi.css" media="screen" />
-<?php }
+function ffxi_head()
+{ 
+	echo '<link type="text/css" rel="stylesheet" href="'.FFXI_URLPATH.'ffxi.css" media="screen" />';
+}
 add_action('wp_head', 'ffxi_head');
 add_action('widgets_init', 'widget_ffxi');
 ?>
