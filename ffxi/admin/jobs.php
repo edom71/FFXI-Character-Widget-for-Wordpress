@@ -21,22 +21,6 @@ if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF']))
 	die('You are not allowed to call this page directly.');
 }
 
-function ffxi_job_stats_header() {
-
-	echo '<link type="text/css" rel="stylesheet" href="'.FFXI_URLPATH.'ffxi.css" media="screen" />';
-	echo '<script type="text/javascript" src="'.FFXI_URLPATH.'/scripts/prototype.js"></script>';
-	echo '<script type="text/javascript" src="'.FFXI_URLPATH.'/scripts/validation.js"></script>';
-	echo '<script type="text/javascript" src="'.FFXI_URLPATH.'/scripts/effects.js"></script>';
-}
-
-function ffxi_job_stats_header2() { ?>
-
-	<!-- testing -->
-<?php
-}
-add_action('admin_head', 'ffxi_job_stats_header2');
-#add_action('admin_head', 'ffxi_job_stats_header');
-
 function ffxi_job_stats() {
 	global $wpdb;
 	

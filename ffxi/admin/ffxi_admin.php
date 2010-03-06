@@ -48,6 +48,20 @@ function add_ffxi_menu() {
 	// add_submenu_page(FFXIFOLDER, 'Setup', 'Setup', 'Change FFXI Stats', 'setup', 'show_ffxi_menu');
 }
 
+function ffxi_js_style_header() {
+	echo '<link type="text/css" rel="stylesheet" href="'.FFXI_URLPATH.'ffxi.css" media="screen" />';
+	echo '<script type="text/javascript" src="'.FFXI_URLPATH.'/scripts/prototype.js"></script>';
+	echo '<script type="text/javascript" src="'.FFXI_URLPATH.'/scripts/validation.js"></script>';
+	echo '<script type="text/javascript" src="'.FFXI_URLPATH.'/scripts/effects.js"></script>';
+}
+
+function ffxi_style_header() {
+	echo '<link type="text/css" rel="stylesheet" href="'.FFXI_URLPATH.'ffxi.css" media="screen" />';
+}
+
+add_action('admin_head-toplevel_page_ffxi', 'ffxi_style_header');
+add_action('admin_head-ffxi-stats_page_job-stats', 'ffxi_js_style_header');
+
 function show_ffxi_menu() {
 	switch ($_GET["page"]) {
 		case "profile" :
