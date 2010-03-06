@@ -397,59 +397,59 @@ function widget_ffxi() {
 
 		$ajobslist = $wpdb->get_results("SELECT * FROM $wpdb->ffxistats_ajobs WHERE id=0"); // Adv. Jobs
 		foreach($ajobslist as $ajob) {
-			if (($ajob->pldlvl != 0) || ($ajob->pldlvl != ""))
+			if ($ajob->pldlvl != 0)
 				$pld = $ajob->pldlvl;
 			else
 				$pld = "-";
-			if (($ajob->samlvl != 0) || ($ajob->samlvl != ""))
+			if ($ajob->samlvl != 0)
 				$sam = $ajob->samlvl;
 			else
 				$sam = "-";
-			if (($ajob->ninlvl != 0) || ($ajob->ninlvl != ""))
+			if ($ajob->ninlvl != 0)
 				$nin = $ajob->ninlvl;
 			else
 				$nin = "-";
-			if (($ajob->smnlvl != 0) || ($ajob->smnlvl != ""))
+			if ($ajob->smnlvl != 0)
 				$smn = $ajob->smnlvl;
 			else
 				$smn = "-";
-			if (($ajob->rnglvl != 0) || ($ajob->rnglvl != ""))
+			if ($ajob->rnglvl != 0)
 				$rng = $ajob->rnglvl;
 			else
 				$rng = "-";
-			if (($ajob->drglvl != 0) || ($ajob->drglvl != ""))
+			if ($ajob->drglvl != 0)
 				$drg = $ajob->drglvl;
 			else
 				$drg = "-";
-			if (($ajob->drklvl != 0) || ($ajob->drklvl != ""))
+			if ($ajob->drklvl != 0)
 				$drk = $ajob->drklvl;
 			else
 				$drk = "-";
-			if (($ajob->blulvl != 0) || ($ajob->blulvl != ""))
+			if ($ajob->blulvl != 0)
 				$blu = $ajob->blulvl;
 			else
 				$blu = "-";
-			if (($ajob->corlvl != 0) || ($ajob->corlvl != ""))
+			if ($ajob->corlvl != 0)
 				$cor = $ajob->corlvl;
 			else
 				$cor = "-";
-			if (($ajob->puplvl != 0) || ($ajob->puplvl != ""))
+			if ($ajob->puplvl != 0)
 				$pup = $ajob->puplvl;
 			else
 				$pup = "-";
-			if (($ajob->dnclvl != 0) || ($ajob->dnclvl != ""))
+			if ($ajob->dnclvl != 0)
 				$dnc = $ajob->dnclvl;
 			else
 				$dnc = "-";
-			if (($ajob->schlvl != 0) || ($ajob->schlvl != ""))
+			if ($ajob->schlvl != 0)
 				$sch = $ajob->schlvl;
 			else
 				$sch = "-";
-			if (($ajob->bstlvl != 0) || ($ajob->bstlvl != ""))
+			if ($ajob->bstlvl != 0)
 				$bst = $ajob->bstlvl;
 			else
 				$bst = "-";
-			if (($ajob->brdlvl != 0) || ($ajob->brdlvl != ""))
+			if ($ajob->brdlvl != 0)
 				$brd = $ajob->brdlvl;
 			else
 				$brd = "-";
