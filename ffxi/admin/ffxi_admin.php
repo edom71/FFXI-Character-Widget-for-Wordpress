@@ -50,9 +50,9 @@ function add_ffxi_menu() {
 
 function ffxi_js_style_header() {
 	echo '<link type="text/css" rel="stylesheet" href="'.FFXI_URLPATH.'ffxi.css" media="screen" />';
-	echo '<script type="text/javascript" src="'.FFXI_URLPATH.'/scripts/prototype.js"></script>';
-	echo '<script type="text/javascript" src="'.FFXI_URLPATH.'/scripts/validation.js"></script>';
-	echo '<script type="text/javascript" src="'.FFXI_URLPATH.'/scripts/effects.js"></script>';
+	echo '<script type="text/javascript" src="'.FFXI_URLPATH.'scripts/prototype.js"></script>';
+	echo '<script type="text/javascript" src="'.FFXI_URLPATH.'scripts/validation.js"></script>';
+	echo '<script type="text/javascript" src="'.FFXI_URLPATH.'scripts/effects.js"></script>';
 }
 
 function ffxi_style_header() {
