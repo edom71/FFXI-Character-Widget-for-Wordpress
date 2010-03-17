@@ -32,8 +32,8 @@ if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF']))
 define('FFXIFOLDER', dirname(plugin_basename(__FILE__)));
 define('FFXI_URLPATH', get_option('siteurl').'/wp-content/plugins/' . FFXIFOLDER.'/');
 
-ini_set('display_errors', '1');
-ini_set('error_reporting', E_ALL);
+//ini_set('display_errors', '1');
+//ini_set('error_reporting', E_ALL);
 
 # DB Version
 global $db_version;
