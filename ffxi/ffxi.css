@@ -5,7 +5,7 @@
 	border-style: ridge;
 	border-width: 4px;
 	padding: 5px 5px 5px 5px;
-	margin: 0px 0px 10px 0px;
+	margin: 0px auto 10px auto;
 	background-color: #CCC;
 	text-align: center;
 }

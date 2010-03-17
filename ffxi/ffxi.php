@@ -1088,7 +1088,7 @@ function widget_ffxi() {
 
 		echo $before_widget;
 		echo $before_title . $title . $after_title;
-		echo '<div style="width: 175px"><center>';
+		echo '<div style="width: 175px; text-align: center;">';
 		if(!$ffxi_options[showpro]) {
 			echo $hidesec . $protable;
 		} else {
@@ -1129,7 +1129,7 @@ function widget_ffxi() {
 		} else {
 			echo $showsec . $mistable;
 		}
-		echo '</center></div>';
+		echo '</div>';
 		echo $after_widget;
 	}
 
