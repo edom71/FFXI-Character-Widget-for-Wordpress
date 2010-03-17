@@ -552,8 +552,8 @@ function widget_ffxi() {
 
 		$title = $chname . "'s Stats";
 
-		$showsec = '<center><div class="ffxi-sec">';
-		$hidesec = '<center><div class="ffxi-sec" style="display: none;">';
+		$showsec = '<div class="ffxi-sec">';
+		$hidesec = '<div class="ffxi-sec" style="display: none;">';
 
 		$protable = '
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -592,7 +592,7 @@ function widget_ffxi() {
 				<td width="5%">&nbsp;</td>
 				<td class="ffxi-value" width="45%">'. $ls .'</td>
 			</tr>
-		</table></div></center>';
+		</table></div>';
 
 		$bjobtable = '
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -631,7 +631,7 @@ function widget_ffxi() {
 				<td width="5%">&nbsp;</td>
 				<td class="ffxi-value" width="45%">'. $thf .'</td>
 			</tr>
-		</table></div></center>';
+		</table></div>';
 
 		$ajobtable = '
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -710,7 +710,7 @@ function widget_ffxi() {
 				<td width="5%">&nbsp;</td>
 				<td class="ffxi-value" width="45%">'. $sch .'</td>
 			</tr>
-		</table></div></center>';
+		</table></div>';
 
 		$crafttable ='
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -773,7 +773,7 @@ function widget_ffxi() {
 				<td class="ffxi-value" width="50%">'. $wdrnk .'</td>
 				<td class="ffxi-value" width="5%">['. $wdlvl .']</td>
 			</tr>
-		</table></div></center>';
+		</table></div>';
 
 		$wstable ='
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -852,7 +852,7 @@ function widget_ffxi() {
 				<td width="5%">&nbsp;</td>
 				<td class="ffxi-value" width="45%">'. $swdws .'</td>
 			</tr>
-		</table></div></center>';
+		</table></div>';
 
 		$comtable = '
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -956,7 +956,7 @@ function widget_ffxi() {
 				<td width="5%">&nbsp;</td>
 				<td class="ffxi-value" width="45%">'. $throw .'</td>
 			</tr>
-		</table></div></center>';
+		</table></div>';
 
 		$magtable ='
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -1010,7 +1010,7 @@ function widget_ffxi() {
 				<td width="5%">&nbsp;</td>
 				<td class="ffxi-value" width="45%">'. $blue .'</td>
 			</tr>
-		</table></div></center>';
+		</table></div>';
 
 		$mistable ='
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -1084,11 +1084,11 @@ function widget_ffxi() {
 				<td width="5%">&nbsp;</td>
 				<td class="ffxi-value">'. $scar .'</td>
 			</tr>
-		</table></div></center>';
+		</table></div>';
 
 		echo $before_widget;
 		echo $before_title . $title . $after_title;
-		echo '<div style="width: 175px">';
+		echo '<div style="width: 175px"><center>';
 		if(!$ffxi_options[showpro]) {
 			echo $hidesec . $protable;
 		} else {
@@ -1129,7 +1129,7 @@ function widget_ffxi() {
 		} else {
 			echo $showsec . $mistable;
 		}
-		echo '</div>';
+		echo '</center></div>';
 		echo $after_widget;
 	}
 

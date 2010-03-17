@@ -179,6 +179,9 @@ function ffxi_preview() {
 		$crys = $mission->crystalline;
 		$evil = $mission->evilsmalldose;
 		$shan = $mission->shantotto;
+		$vis = $mission->vision;
+		$hero = $mission->heroes;
+		$scar = $mission->scars;
 	}
 	
 	?>
@@ -901,6 +904,21 @@ function ffxi_preview() {
 						<td class="ffxi-item" width="50%">ASA</td>
 						<td width="5%">&nbsp;</td>
 						<td class="ffxi-value"><?php echo $shan; ?></td>
+					</tr>
+					<tr>
+						<td class="ffxi-item" width="50%">VoA</td>
+						<td width="5%">&nbsp;</td>
+						<td class="ffxi-value"><?php echo $vis; ?></td>
+					</tr>
+					<tr>
+						<td class="ffxi-item" width="50%">HoA</td>
+						<td width="5%">&nbsp;</td>
+						<td class="ffxi-value"><?php echo $hero; ?></td>
+					</tr>
+					<tr>
+						<td class="ffxi-item" width="50%">SoA</td>
+						<td width="5%">&nbsp;</td>
+						<td class="ffxi-value"><?php echo $scar; ?></td>
 					</tr>
 				</table>
 			</div>
