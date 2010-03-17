@@ -1072,17 +1072,17 @@ function widget_ffxi() {
 				<td class="ffxi-value">'. $shan .'</td>
 			</tr>
 			<tr>
-				<td class="ffxi-item" width="50%">VoA"</td>
+				<td class="ffxi-item" width="50%">VoA</td>
 				<td width="5%">&nbsp;</td>
 				<td class="ffxi-value">'. $vis .'</td>
 			</tr>
 			<tr>
-				<td class="ffxi-item" width="50%">HoA"</td>
+				<td class="ffxi-item" width="50%">HoA</td>
 				<td width="5%">&nbsp;</td>
 				<td class="ffxi-value">'. $hero .'</td>
 			</tr>
 			<tr>
-				<td class="ffxi-item" width="50%">SoA"</td>
+				<td class="ffxi-item" width="50%">SoA</td>
 				<td width="5%">&nbsp;</td>
 				<td class="ffxi-value">'. $scar .'</td>
 			</tr>
