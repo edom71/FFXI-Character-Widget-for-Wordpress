@@ -2,7 +2,7 @@
 /*
 Plugin Name: FFXI Character Stats for Wordpress
 Description: Add a display menu for your stats.
-Version: 4.0
+Version: 4.1
 Author: Demonicpagan
 Author URI: http://trials.stelth2000inc.com
 
@@ -37,7 +37,7 @@ define('FFXI_URLPATH', get_option('siteurl').'/wp-content/plugins/' . FFXIFOLDER
 
 # DB Version
 global $db_version;
-$db_version = "4.0";
+$db_version = "4.1";
 
 # Admin Panel
 include_once (dirname (__FILE__)."/admin/ffxi_admin.php");
@@ -316,6 +316,9 @@ function ffxi_install()
 			crystalline varchar(200) NOT NULL default '',
 			evilsmalldose varchar(200) NOT NULL default '',
 			shantotto varchar(200) NOT NULL default '',
+			vision varchar(200) NOT NULL default '',
+			heroes varchar(200) NOT NULL default '',
+			scars varchar(200) NOT NULL default '',
 			PRIMARY KEY id (id)
 			) TYPE=MyISAM;";
 
@@ -323,10 +326,11 @@ function ffxi_install()
 
 		# Insert default values into ffxistats_mission database table
 		$blnk = "";
+		$na = "N/A"
 
 		$insert = "INSERT INTO " . $wpdb->ffxistats_mission .
-			" (bastok, windy, sandy, zilart, promathia, ahturhgan, altana, crystalline, evilsmalldose, shantotto) " .
-			"VALUES('". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."')";
+			" (bastok, windy, sandy, zilart, promathia, ahturhgan, altana, crystalline, evilsmalldose, shantotto, vision, heroes, scars) " .
+			"VALUES('". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $na ."', '". $na ."', '". $na ."')";
 
 		$result = $wpdb->query($insert);
 	}
@@ -340,7 +344,7 @@ function ffxi_install()
 	if ( $installed_ver != $db_version )
 	{
 		# Perform database table updates here.
-		$sql = "";
+		$sql = "ALTER TABLE ".$ffxistats_mission." ADD vision varchar(200) NOT NULL default 'N/A', heroes varchar(200) NOT NULL default 'N/A', scars varchar(200) NOT NULL default 'N/A'";
 		#$wpdb->query("ALTER TABLE ".$ffxistats_mission." ADD shantotto varchar(200) NOT NULL default ''" );
 		dbDelta($sql);
 		update_option("ffxi_db_version", $db_version);
@@ -543,12 +547,15 @@ function widget_ffxi() {
 			$crys = $mission->crystalline;
 			$evil = $mission->evilsmalldose;
 			$shan = $mission->shantotto;
+			$vis = $mission->vision;
+			$hero = $mission->heroes;
+			$scar = $mission->scars;
 		}
 
 		$title = $chname . "'s Stats";
 
-		$showsec = '<div class="ffxi-sec">';
-		$hidesec = '<div class="ffxi-sec" style="display: none;">';
+		$showsec = '<center><div class="ffxi-sec">';
+		$hidesec = '<center><div class="ffxi-sec" style="display: none;">';
 
 		$protable = '
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -587,7 +594,7 @@ function widget_ffxi() {
 				<td width="5%">&nbsp;</td>
 				<td class="ffxi-value" width="45%">'. $ls .'</td>
 			</tr>
-		</table></div>';
+		</table></div></center>';
 
 		$bjobtable = '
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -626,7 +633,7 @@ function widget_ffxi() {
 				<td width="5%">&nbsp;</td>
 				<td class="ffxi-value" width="45%">'. $thf .'</td>
 			</tr>
-		</table></div>';
+		</table></div></center>';
 
 		$ajobtable = '
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -705,7 +712,7 @@ function widget_ffxi() {
 				<td width="5%">&nbsp;</td>
 				<td class="ffxi-value" width="45%">'. $sch .'</td>
 			</tr>
-		</table></div>';
+		</table></div></center>';
 
 		$crafttable ='
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -768,7 +775,7 @@ function widget_ffxi() {
 				<td class="ffxi-value" width="50%">'. $wdrnk .'</td>
 				<td class="ffxi-value" width="5%">['. $wdlvl .']</td>
 			</tr>
-		</table></div>';
+		</table></div></center>';
 
 		$wstable ='
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -847,7 +854,7 @@ function widget_ffxi() {
 				<td width="5%">&nbsp;</td>
 				<td class="ffxi-value" width="45%">'. $swdws .'</td>
 			</tr>
-		</table></div>';
+		</table></div></center>';
 
 		$comtable = '
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -951,7 +958,7 @@ function widget_ffxi() {
 				<td width="5%">&nbsp;</td>
 				<td class="ffxi-value" width="45%">'. $throw .'</td>
 			</tr>
-		</table></div>';
+		</table></div></center>';
 
 		$magtable ='
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -1005,7 +1012,7 @@ function widget_ffxi() {
 				<td width="5%">&nbsp;</td>
 				<td class="ffxi-value" width="45%">'. $blue .'</td>
 			</tr>
-		</table></div>';
+		</table></div></center>';
 
 		$mistable ='
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -1064,7 +1071,22 @@ function widget_ffxi() {
 				<td width="5%">&nbsp;</td>
 				<td class="ffxi-value">'. $shan .'</td>
 			</tr>
-		</table></div>';
+			<tr>
+				<td class="ffxi-item" width="50%">VoA"</td>
+				<td width="5%">&nbsp;</td>
+				<td class="ffxi-value">'. $vis .'</td>
+			</tr>
+			<tr>
+				<td class="ffxi-item" width="50%">HoA"</td>
+				<td width="5%">&nbsp;</td>
+				<td class="ffxi-value">'. $hero .'</td>
+			</tr>
+			<tr>
+				<td class="ffxi-item" width="50%">SoA"</td>
+				<td width="5%">&nbsp;</td>
+				<td class="ffxi-value">'. $scar .'</td>
+			</tr>
+		</table></div></center>';
 
 		echo $before_widget;
 		echo $before_title . $title . $after_title;

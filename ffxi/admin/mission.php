@@ -34,6 +34,9 @@ function ffxi_mission_stats() {
 		$crys = $mission->crystalline;
 		$evil = $mission->evilsmalldose;
 		$shan = $mission->shantotto;
+		$vis = $mission->vision;
+		$hero = $mission->heroes;
+		$scar = $mission->scars;
 	}
 
 	if ( isset($_POST['updateopt']) ) {
@@ -49,8 +52,11 @@ function ffxi_mission_stats() {
 		$crys = attribute_escape($_POST[crystalline]);
 		$evil = attribute_escape($_POST['evilsmalldose']);
 		$shan = attribute_escape($_POST['shantotto']);
+		$vis = attribute_escape($_POST['vision']);
+		$hero = attribute_escape($_POST['heroes']);
+		$scar = attribute_escape($_POST['scars']);
 
-		$result = $wpdb->query("UPDATE $wpdb->ffxistats_mission SET bastok='$bas', windy='$wind', sandy='$sand', zilart='$zil', promathia='$cop', ahturhgan='$toau', altana='$wog', crystalline='$crys', evilsmalldose='$evil', shantotto='$shan'");
+		$result = $wpdb->query("UPDATE $wpdb->ffxistats_mission SET bastok='$bas', windy='$wind', sandy='$sand', zilart='$zil', promathia='$cop', ahturhgan='$toau', altana='$wog', crystalline='$crys', evilsmalldose='$evil', shantotto='$shan', vision=$vis, heroes=$hero, scars=$scar");
 
 		$messagetext = '<font color="green">Missions updated successfully.</font>';
 	}
@@ -103,6 +109,18 @@ function ffxi_mission_stats() {
                             <th align="left">A Shantotto Ascension</th>
                             <td><input type="text" size="45" maxlength="45" name="shantotto" value="<?php echo $shan; ?>" /></td>
                         </tr>
+						<tr valign="top">
+							<th align="left">Vision of Abyssea</th>
+							<td><input type="text" size="45" maxlength="45" name="vision" value="<?php echo $vis; ?>" /></td>
+						</tr>
+						<tr valign="top">
+							<th align="left">Heroes of Abyssea</th>
+							<td><input type="text" size="45" maxlength="45" name="heroes" value="<?php echo $hero; ?>" disabled /></td>
+						</tr>
+						<tr valign="top">
+							<th align="left">Scars of Abyssea</th>
+							<td><input type="text" size="45" maxlength="45" name="scars" value="<?php echo $scar; ?>" disabled /></td>
+						</tr>
                     </table>
                     <div class="submit">
                         <input type="submit" name="updateopt" value="Update Stats &raquo;" />
