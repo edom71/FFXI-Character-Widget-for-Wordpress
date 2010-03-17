@@ -32,8 +32,8 @@ if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF']))
 define('FFXIFOLDER', dirname(plugin_basename(__FILE__)));
 define('FFXI_URLPATH', get_option('siteurl').'/wp-content/plugins/' . FFXIFOLDER.'/');
 
-//ini_set('display_errors', '1');
-// ini_set('error_reporting', E_ALL);
+ini_set('display_errors', '1');
+ini_set('error_reporting', E_ALL);
 
 # DB Version
 global $db_version;
@@ -316,9 +316,9 @@ function ffxi_install()
 			crystalline varchar(200) NOT NULL default '',
 			evilsmalldose varchar(200) NOT NULL default '',
 			shantotto varchar(200) NOT NULL default '',
-			vision varchar(200) NOT NULL default '',
-			heroes varchar(200) NOT NULL default '',
-			scars varchar(200) NOT NULL default '',
+			vision varchar(200) NOT NULL default 'N/A',
+			heroes varchar(200) NOT NULL default 'N/A',
+			scars varchar(200) NOT NULL default 'N/A',
 			PRIMARY KEY id (id)
 			) TYPE=MyISAM;";
 
@@ -326,7 +326,7 @@ function ffxi_install()
 
 		# Insert default values into ffxistats_mission database table
 		$blnk = "";
-		$na = "N/A"
+		$na = "N/A";
 
 		$insert = "INSERT INTO " . $wpdb->ffxistats_mission .
 			" (bastok, windy, sandy, zilart, promathia, ahturhgan, altana, crystalline, evilsmalldose, shantotto, vision, heroes, scars) " .
@@ -344,7 +344,7 @@ function ffxi_install()
 	if ( $installed_ver != $db_version )
 	{
 		# Perform database table updates here.
-		$sql = "ALTER TABLE ".$ffxistats_mission." ADD vision varchar(200) NOT NULL default 'N/A', heroes varchar(200) NOT NULL default 'N/A', scars varchar(200) NOT NULL default 'N/A'";
+		$sql = "ALTER TABLE ". $wpdb->ffxistats_mission ." ADD vision varchar(200) NOT NULL default 'N/A', heroes varchar(200) NOT NULL default 'N/A', scars varchar(200) NOT NULL default 'N/A'";
 		#$wpdb->query("ALTER TABLE ".$ffxistats_mission." ADD shantotto varchar(200) NOT NULL default ''" );
 		dbDelta($sql);
 		update_option("ffxi_db_version", $db_version);
