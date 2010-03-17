@@ -344,7 +344,7 @@ function ffxi_install()
 	if ( $installed_ver != $db_version )
 	{
 		# Perform database table updates here.
-		$sql = "ALTER TABLE ". $wpdb->ffxistats_mission ." ADD vision varchar(200) NOT NULL default 'N/A', heroes varchar(200) NOT NULL default 'N/A', scars varchar(200) NOT NULL default 'N/A'";
+		$sql = "ALTER TABLE ". $wpdb->ffxistats_mission ." ADD vision varchar(200) NOT NULL default 'N/A', ADD heroes varchar(200) NOT NULL default 'N/A', ADD scars varchar(200) NOT NULL default 'N/A'";
 		#$wpdb->query("ALTER TABLE ".$ffxistats_mission." ADD shantotto varchar(200) NOT NULL default ''" );
 		dbDelta($sql);
 		update_option("ffxi_db_version", $db_version);
