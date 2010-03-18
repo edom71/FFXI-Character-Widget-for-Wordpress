@@ -115,11 +115,17 @@ function ffxi_mission_stats() {
 						</tr>
 						<tr valign="top">
 							<th align="left">Heroes of Abyssea</th>
-							<td><input type="text" size="45" maxlength="45" name="heroes" value="<?php echo $hero; ?>" disabled /></td>
+							<td>
+								<input type="text" size="45" maxlength="45" name="heroes" value="<?php echo $hero; ?>" disabled />
+								<input type="hidden" name="heroes" value="N/A" />
+							</td>
 						</tr>
 						<tr valign="top">
 							<th align="left">Scars of Abyssea</th>
-							<td><input type="text" size="45" maxlength="45" name="scars" value="<?php echo $scar; ?>" disabled /></td>
+							<td>
+								<input type="text" size="45" maxlength="45" name="scars" value="<?php echo $scar; ?>" disabled />
+								<input type="hidden" name="scars" value="N/A" />
+							</td>
 						</tr>
                     </table>
                     <div class="submit">
