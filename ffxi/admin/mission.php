@@ -50,13 +50,13 @@ function ffxi_mission_stats() {
 		$toau = attribute_escape($_POST[ahturhgan]);
 		$wog = attribute_escape($_POST[altana]);
 		$crys = attribute_escape($_POST[crystalline]);
-		$evil = attribute_escape($_POST['evilsmalldose']);
-		$shan = attribute_escape($_POST['shantotto']);
-		$vis = attribute_escape($_POST['vision']);
-		$hero = attribute_escape($_POST['heroes']);
-		$scar = attribute_escape($_POST['scars']);
+		$evil = attribute_escape($_POST[evilsmalldose]);
+		$shan = attribute_escape($_POST[shantotto]);
+		$vis = attribute_escape($_POST[vision]);
+		$hero = attribute_escape($_POST[heroes]);
+		$scar = attribute_escape($_POST[scars]);
 
-		$result = $wpdb->query("UPDATE $wpdb->ffxistats_mission SET bastok='$bas', windy='$wind', sandy='$sand', zilart='$zil', promathia='$cop', ahturhgan='$toau', altana='$wog', crystalline='$crys', evilsmalldose='$evil', shantotto='$shan', vision=$vis, heroes=$hero, scars=$scar");
+		$result = $wpdb->query("UPDATE $wpdb->ffxistats_mission SET bastok='$bas', windy='$wind', sandy='$sand', zilart='$zil', promathia='$cop', ahturhgan='$toau', altana='$wog', crystalline='$crys', evilsmalldose='$evil', shantotto='$shan', vision='$vis', heroes='$hero', scars='$scar'");
 
 		$messagetext = '<font color="green">Missions updated successfully.</font>';
 	}
