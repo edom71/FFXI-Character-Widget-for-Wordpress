@@ -2,7 +2,7 @@
 /*
 Plugin Name: FFXI Character Stats for Wordpress
 Description: Add a display menu for your stats.
-Version: 4.1
+Version: 4.1.1
 Author: Demonicpagan
 Author URI: http://trials.stelth2000inc.com
 
@@ -37,7 +37,7 @@ define('FFXI_URLPATH', get_option('siteurl').'/wp-content/plugins/' . FFXIFOLDER
 
 # DB Version
 global $db_version;
-$db_version = "4.1";
+$db_version = "4.1.1";
 
 # Admin Panel
 include_once (dirname (__FILE__)."/admin/ffxi_admin.php");
@@ -100,7 +100,7 @@ function ffxi_install()
 			" (chname, server, nation, race, sex, rank, linkshell) " .
 			"VALUES ('". $wpdb->escape($chname) ."', '". $wpdb->escape($server) ."', '". $wpdb->escape($nation) ."', '". $wpdb->escape($race) ."', '". $wpdb->escape($sex) ."', '". $wpdb->escape($rank) ."', '". $wpdb->escape($ls) ."')";
 
-		$results = $wpdb->query($insert);
+		$wpdb->query($insert);
 		ffxi_default_options();
 		add_option("ffxi_db_version", $db_version);
 	}
@@ -128,7 +128,7 @@ function ffxi_install()
 			" (warlvl, whmlvl, rdmlvl, mnklvl, blmlvl, thflvl) " .
 			"VALUES ('". $one ."', '". $one ."', '". $one ."', '". $one ."', '". $one ."', '". $one ."')";
 
-		$result = $wpdb->query($insert);
+		$wpdb->query($insert);
 	}
 
 	if ($wpdb->get_var("SHOW TABLES LIKE '$wpdb->ffxistats_ajobs'") != $wpdb->ffxistats_ajobs)
@@ -162,7 +162,7 @@ function ffxi_install()
 			" (pldlvl, drklvl, bstlvl, brdlvl, rnglvl, smnlvl, samlvl, ninlvl, drglvl, blulvl, corlvl, puplvl, dnclvl, schlvl) " .
 			"VALUES ('". $zero ."', '". $zero ."', '". $zero ."', '". $zero ."', '". $zero ."', '". $zero ."', '". $zero ."', '". $zero ."', '". $zero ."', '". $zero ."', '". $zero ."', '". $zero ."', '". $zero ."', '". $zero ."')";
 
-		$result = $wpdb->query($insert);
+		$wpdb->query($insert);
 	}
 
 	if ($wpdb->get_var("SHOW TABLES LIKE '$wpdb->ffxistats_craft'") != $wpdb->ffxistats_craft)
@@ -200,7 +200,7 @@ function ffxi_install()
 			" (alch_rnk, alch_lvl, bsmith_rnk, bsmith_lvl, bone_rnk, bone_lvl, cloth_rnk, cloth_lvl, cook_rnk, cook_lvl, fish_rnk, fish_lvl, gsmith_rnk, gsmith_lvl, lthr_rnk, lthr_lvl, wood_rnk, wood_lvl) " .
 			"VALUES('". $wpdb->escape($rnk) ."', '". $lvl ."', '". $wpdb->escape($rnk) ."', '". $lvl ."', '". $wpdb->escape($rnk) ."', '". $lvl ."', '". $wpdb->escape($rnk) ."', '". $lvl ."', '". $wpdb->escape($rnk) ."', '". $lvl ."', '". $wpdb->escape($rnk) ."', '". $lvl ."', '". $wpdb->escape($rnk) ."', '". $lvl ."', '". $wpdb->escape($rnk) ."', '". $lvl ."', '". $wpdb->escape($rnk) ."', '". $lvl ."')";
 
-		$result = $wpdb->query($insert);
+		$wpdb->query($insert);
 	}
 
 	if ($wpdb->get_var("SHOW TABLES LIKE '$wpdb->ffxistats_weapon'") != $wpdb->ffxistats_weapon)
@@ -233,7 +233,7 @@ function ffxi_install()
 			" (arch_ws, axe_ws, club_ws, dagger_ws, graxe_ws, grkat_ws, grswd_ws, h2h_ws, kat_ws, mark_ws, pole_ws, scythe_ws, staff_ws, swd_ws) " .
 			"VALUES('". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."')";
 
-		$result = $wpdb->query($insert);
+		$wpdb->query($insert);
 	}
 
 	if ($wpdb->get_var("SHOW TABLES LIKE '$wpdb->ffxistats_combat'") != $wpdb->ffxistats_combatt)
@@ -271,7 +271,7 @@ function ffxi_install()
 			" (arch_lvl, axe_lvl, club_lvl, dagger_lvl, evasion_lvl, graxe_lvl, grkat_lvl, grswd_lvl, guard_lvl, h2h_lvl, kat_lvl, mark_lvl, parry_lvl, pole_lvl, scythe_lvl, shield_lvl, staff_lvl, sword_lvl, throw_lvl) " .
 			"VALUES('". $null ."', '". $null ."', '". $null ."', '". $null ."', '". $null ."', '". $null ."', '". $null ."', '". $null ."', '". $null ."', '". $null ."', '". $null ."', '". $null ."', '". $null ."', '". $null ."', '". $null ."', '". $null ."', '". $null ."', '". $null ."', '". $null ."')";
 
-		$result = $wpdb->query($insert);
+		$wpdb->query($insert);
 	}
 
 	if ($wpdb->get_var("SHOW TABLES LIKE '$wpdb->ffxistats_magic'") != $wpdb->ffxistats_magic)
@@ -299,7 +299,7 @@ function ffxi_install()
 			" (dark, divine, elemental, enfeebling, enhancing, healing, ninjutsu, summoning, blue) " .
 			"VALUES('". $null ."', '". $null ."', '". $null ."', '". $null ."', '". $null ."', '". $null ."', '". $null ."', '". $null ."', '". $null ."')";
 
-		$result = $wpdb->query($insert);
+		$wpdb->query($insert);
 	}
 
 	if ($wpdb->get_var("SHOW TABLES LIKE '$wpdb->ffxistats_mission'") != $wpdb->ffxistats_mission)
@@ -332,7 +332,7 @@ function ffxi_install()
 			" (bastok, windy, sandy, zilart, promathia, ahturhgan, altana, crystalline, evilsmalldose, shantotto, vision, heroes, scars) " .
 			"VALUES('". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $blnk ."', '". $na ."', '". $na ."', '". $na ."')";
 
-		$result = $wpdb->query($insert);
+		$wpdb->query($insert);
 	}
 
 	$ffxi_options = get_option('ffxi_options');
@@ -344,7 +344,37 @@ function ffxi_install()
 	if ( $installed_ver != $db_version )
 	{
 		# Perform database table updates here.
-		$wpdb->query("ALTER TABLE ". $wpdb->ffxistats_mission ." ADD COLUMN vision varchar(200) NOT NULL default 'N/A', ADD COLUMN heroes varchar(200) NOT NULL default 'N/A', ADD COLUMN scars varchar(200) NOT NULL default 'N/A'");
+		$server = $wpdb->get_var("SELECT server from $wpdb->ffxistats WHERE id=0");
+
+		switch ($server) {
+			case "Fairy": 
+				$statement = "'Sylph' WHERE server = '$server'";
+				break;
+			case "Kujata":
+				$statement = "'Valefor' WHERE server = '$server'";
+				break;
+			case "Remora":
+				$statement = "'Leviathan' WHERE server = '$server'";
+				break;
+			case "Midgardsormr":
+				$statement ="'Quetzalcoatl' WHERE server = '$server'";
+				break;
+			case "Hades":
+				$statement = "'Cerberus' WHERE server = '$server'";
+				break;
+			case "Seraph":
+				$statement = "'Bismarck' WHERE server = '$server'";
+				break;
+			case "Garuda":
+				$statement = "'Lakshmi' WHERE server = '$server'";
+				break;
+			case "Pandemonium":
+				$statement = "'Asura' WHERE server = '$server'";
+				break;
+		}
+
+		$wpdb->query("UPDATE ". $wpdb->ffxistats ." SET server = ".$statement);
+
 		update_option("ffxi_db_version", $db_version);
 	}
 }
@@ -492,7 +522,7 @@ function widget_ffxi() {
 			$katws = $weapon->kat_ws;
 			$markws = $weapon->mark_ws;
 			$polews = $weapon->pole_ws;
-			$scyws = $weaon->scythe_ws;
+			$scyws = $weapon->scythe_ws;
 			$staffws = $weapon->staff_ws;
 			$swdws = $weapon->swd_ws;
 		}
