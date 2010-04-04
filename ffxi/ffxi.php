@@ -2,7 +2,7 @@
 /*
 Plugin Name: FFXI Character Stats for Wordpress
 Description: Add a display menu for your stats.
-Version: 4.1.1
+Version: 4.1.2
 Author: Demonicpagan
 Author URI: http://trials.stelth2000inc.com
 
@@ -37,7 +37,7 @@ define('FFXI_URLPATH', get_option('siteurl').'/wp-content/plugins/' . FFXIFOLDER
 
 # DB Version
 global $db_version;
-$db_version = "4.1.1";
+$db_version = "4.1.2";
 
 # Admin Panel
 include_once (dirname (__FILE__)."/admin/ffxi_admin.php");
@@ -187,6 +187,8 @@ function ffxi_install()
 			lthr_lvl int(11) NOT NULL default '0',
 			wood_rnk varchar(50) NOT NULL default '',
 			wood_lvl int(11) NOT NULL default '0',
+			syn_rnk varchar(50) NOT NULL default '',
+			syn_lvl int(11) NOT NULL default '0',
 			PRIMARY KEY id (id)
 			) TYPE=MyISAM;";
 
@@ -197,8 +199,8 @@ function ffxi_install()
 		$lvl = 0;
 
 		$insert = "INSERT INTO " . $wpdb->ffxistats_craft .
-			" (alch_rnk, alch_lvl, bsmith_rnk, bsmith_lvl, bone_rnk, bone_lvl, cloth_rnk, cloth_lvl, cook_rnk, cook_lvl, fish_rnk, fish_lvl, gsmith_rnk, gsmith_lvl, lthr_rnk, lthr_lvl, wood_rnk, wood_lvl) " .
-			"VALUES('". $wpdb->escape($rnk) ."', '". $lvl ."', '". $wpdb->escape($rnk) ."', '". $lvl ."', '". $wpdb->escape($rnk) ."', '". $lvl ."', '". $wpdb->escape($rnk) ."', '". $lvl ."', '". $wpdb->escape($rnk) ."', '". $lvl ."', '". $wpdb->escape($rnk) ."', '". $lvl ."', '". $wpdb->escape($rnk) ."', '". $lvl ."', '". $wpdb->escape($rnk) ."', '". $lvl ."', '". $wpdb->escape($rnk) ."', '". $lvl ."')";
+			" (alch_rnk, alch_lvl, bsmith_rnk, bsmith_lvl, bone_rnk, bone_lvl, cloth_rnk, cloth_lvl, cook_rnk, cook_lvl, fish_rnk, fish_lvl, gsmith_rnk, gsmith_lvl, lthr_rnk, lthr_lvl, wood_rnk, wood_lvl, syn_rnk, syn_lvl) " .
+			"VALUES('". $wpdb->escape($rnk) ."', '". $lvl ."', '". $wpdb->escape($rnk) ."', '". $lvl ."', '". $wpdb->escape($rnk) ."', '". $lvl ."', '". $wpdb->escape($rnk) ."', '". $lvl ."', '". $wpdb->escape($rnk) ."', '". $lvl ."', '". $wpdb->escape($rnk) ."', '". $lvl ."', '". $wpdb->escape($rnk) ."', '". $lvl ."', '". $wpdb->escape($rnk) ."', '". $lvl ."', '". $wpdb->escape($rnk) ."', '". $lvl ."', '". $wpdb->escape($rnk) ."', '". $lvl ."')";
 
 		$wpdb->query($insert);
 	}
@@ -344,36 +346,7 @@ function ffxi_install()
 	if ( $installed_ver != $db_version )
 	{
 		# Perform database table updates here.
-		$server = $wpdb->get_var("SELECT server from $wpdb->ffxistats WHERE id=0");
-
-		switch ($server) {
-			case "Fairy": 
-				$statement = "'Sylph' WHERE server = '$server'";
-				break;
-			case "Kujata":
-				$statement = "'Valefor' WHERE server = '$server'";
-				break;
-			case "Remora":
-				$statement = "'Leviathan' WHERE server = '$server'";
-				break;
-			case "Midgardsormr":
-				$statement ="'Quetzalcoatl' WHERE server = '$server'";
-				break;
-			case "Hades":
-				$statement = "'Cerberus' WHERE server = '$server'";
-				break;
-			case "Seraph":
-				$statement = "'Bismarck' WHERE server = '$server'";
-				break;
-			case "Garuda":
-				$statement = "'Lakshmi' WHERE server = '$server'";
-				break;
-			case "Pandemonium":
-				$statement = "'Asura' WHERE server = '$server'";
-				break;
-		}
-
-		$wpdb->query("UPDATE ". $wpdb->ffxistats ." SET server = ".$statement);
+		$wpdb->query("ALTER TABLE ". $wpdb->ffxistats_craft ." ADD(syn_rnk varchar(50), syn_lvl int(11) )");
 
 		update_option("ffxi_db_version", $db_version);
 	}
@@ -507,6 +480,8 @@ function widget_ffxi() {
 			$ltlvl = $craft->lthr_lvl;
 			$wdrnk = $craft->wood_rnk;
 			$wdlvl = $craft->wood_lvl;
+			$synrnk = $craft->syn_rnk;
+			$synlvl = $craft->syn_lvl;
 		}
 
 		$weaponlist = $wpdb->get_results("SELECT * FROM $wpdb->ffxistats_weapon WHERE id=0"); // Weapon Skills
@@ -802,6 +777,12 @@ function widget_ffxi() {
 				<td width="15%">&nbsp;</td>
 				<td class="ffxi-value" width="50%">'. $wdrnk .'</td>
 				<td class="ffxi-value" width="5%">['. $wdlvl .']</td>
+			</tr>
+			<tr>
+				<td class="ffxi-item" width="30%">Synergy</td>
+				<td width="15%">&nbsp;</td>
+				<td class="ffxi-value" width="50%">'. $synrnk .'</td>
+				<td class="ffxi-value" width="5%">['. $synlvl .']</td>
 			</tr>
 		</table></div>';
 

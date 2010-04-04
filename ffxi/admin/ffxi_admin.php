@@ -57,6 +57,7 @@ function ffxi_js_style_header() {
 
 function ffxi_style_header() {
 	echo '<link type="text/css" rel="stylesheet" href="'.FFXI_URLPATH.'ffxi.css" media="screen" />';
+	echo '<script type="text/javascript" src="'.FFXI_URLPATH.'scripts/preview.js"></script>';
 }
 
 add_action('admin_head-toplevel_page_ffxi', 'ffxi_style_header');

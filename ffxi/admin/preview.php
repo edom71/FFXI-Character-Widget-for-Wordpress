@@ -134,6 +134,8 @@ function ffxi_preview() {
 		$ltlvl = $craft->lthr_lvl;
 		$wdrnk = $craft->wood_rnk;
 		$wdlvl = $craft->wood_lvl;
+		$synrnk = $craft->syn_rnk;
+		$synlvl = $craft->syn_lvl;
 	}
 
 	$weaponlist = $wpdb->get_results("SELECT * FROM $wpdb->ffxistats_weapon WHERE id=0"); // Weapon Skills
@@ -183,8 +185,8 @@ function ffxi_preview() {
 		$hero = $mission->heroes;
 		$scar = $mission->scars;
 	}
-	
 	?>
+
 	<h2><?php echo "".$chname."'s"; ?> Stats Preview</h2>
 	<div class="wrap">
 			<div style="float:right">
@@ -200,35 +202,35 @@ function ffxi_preview() {
 								</tr>
 								<tr valign="top">
 									<td align="left">Show Profile</td>
-									<td><input type="checkbox" name="showpro" value="1" <?php checked('1', $ffxi_options[showpro]); ?> /></td>
+									<td><input id="showpro" type="checkbox" name="showpro" value="1" <?php checked('1', $ffxi_options[showpro]); ?> /></td>
 								</tr>
 								<tr valign="top">
 									<td align="left">Show Basic Jobs</td>
-									<td><input type="checkbox" name="showbjob" value="1" <?php checked('1', $ffxi_options[showbjob]); ?> /></td>
+									<td><input id="showbjob" type="checkbox" name="showbjob" value="1" <?php checked('1', $ffxi_options[showbjob]); ?> /></td>
 								</tr>
 								<tr valign="top">
 									<td align="left">Show Adv. Jobs</td>
-									<td><input type="checkbox" name="showajob" value="1" <?php checked('1', $ffxi_options[showajob]); ?> /></td>
+									<td><input id="showajob" type="checkbox" name="showajob" value="1" <?php checked('1', $ffxi_options[showajob]); ?> /></td>
 								</tr>
 								<tr valign="top">
 									<td align="left">Show Craft Skills</td>
-									<td><input type="checkbox" name="showcraft" value="1" <?php checked('1', $ffxi_options[showcraft]); ?> /></td>
+									<td><input id="showcraft" type="checkbox" name="showcraft" value="1" <?php checked('1', $ffxi_options[showcraft]); ?> /></td>
 								</tr>
 								<tr valign="top">
 									<td align="left">Show Weapon Skills</td>
-									<td><input type="checkbox" name="showws" value="1" <?php checked('1', $ffxi_options[showws]); ?> /></td>
+									<td><input id="showws" type="checkbox" name="showws" value="1" <?php checked('1', $ffxi_options[showws]); ?> /></td>
 								</tr>
 								<tr valign="top">
 									<td align="left">Show Combat Skills</td>
-									<td><input type="checkbox" name="showcom" value="1" <?php checked('1', $ffxi_options[showcom]); ?> /></td>
+									<td><input id="showcom" type="checkbox" name="showcom" value="1" <?php checked('1', $ffxi_options[showcom]); ?> /></td>
 								</tr>
 								<tr valign="top">
 									<td align="left">Show Magic Skills</td>
-									<td><input type="checkbox" name="showmag" value="1" <?php checked('1', $ffxi_options[showmag]); ?> /></td>
+									<td><input id="showmag" type="checkbox" name="showmag" value="1" <?php checked('1', $ffxi_options[showmag]); ?> /></td>
 								</tr>
 								<tr valign="top">
 									<td align="left">Show Missions</td>
-									<td><input type="checkbox" name="showmis" value="1" <?php checked('1', $ffxi_options[showmis]); ?> /></td>
+									<td><input id="showmis" type="checkbox" name="showmis" value="1" <?php checked('1', $ffxi_options[showmis]); ?> /></td>
 								</tr>
 							</table>
 							<div class="submit"><input type="submit" name="updateopt" value="Update &raquo;" /></div>
@@ -238,12 +240,7 @@ function ffxi_preview() {
 			</div>
 		</div>
 		<div style="width: 175px;">
-			<?php 
-			if(!$ffxi_options[showpro])  
-				echo "<div class='ffxi-sec' style='display: none;'>";
-			else
-				echo "<div class='ffxi-sec'>";
-			?>
+			<div id='showprotbl' class='ffxi-sec'>
 				<table border='0' cellpadding='0' cellspacing='0' width='100%'>
 					<tr>
 						<td>
@@ -284,12 +281,7 @@ function ffxi_preview() {
                     </tr>
                 </table>
             </div>
-			<?php 
-			if(!$ffxi_options[showbjob])  
-				echo "<div class='ffxi-sec' style='display: none;'>";
-			else
-				echo "<div class='ffxi-sec'>";
-			?>
+			<div id='showbjobtbl' class='ffxi-sec'>
                 <table border='0' cellpadding='0' cellspacing='0' width='100%'>
                     <tr>
                         <td>
@@ -330,12 +322,7 @@ function ffxi_preview() {
                     </tr>
                 </table>
             </div>
-			<?php 
-			if(!$ffxi_options[showajob])  
-				echo "<div class='ffxi-sec' style='display: none;'>";
-			else
-				echo "<div class='ffxi-sec'>";
-			?>
+			<div id='showajobtbl' class='ffxi-sec'>
                 <table border='0' cellpadding='0' cellspacing='0' width='100%'>
                     <tr>
                         <td>
@@ -514,12 +501,7 @@ function ffxi_preview() {
                     </tr>
                 </table>
             </div>
-			<?php 
-			if(!$ffxi_options[showcraft])  
-				echo "<div class='ffxi-sec' style='display: none;'>";
-			else
-				echo "<div class='ffxi-sec'>";
-			?>
+			<div id='showcrafttbl' class='ffxi-sec'>
                 <table border='0' cellpadding='0' cellspacing='0' width='100%'>
                     <tr>
                         <td>
@@ -569,7 +551,8 @@ function ffxi_preview() {
                         <td width="15%">&nbsp;</td>
                         <td class="ffxi-value" width="50%"><?php echo $gsrnk; ?></td>
                         <td class="ffxi-value" width="5%">[<?php echo $gslvl; ?>]</td>
-                    </tr>                	<tr>
+                    </tr>
+                	<tr>
                     	<td class="ffxi-item" width="30%">Leathercraft</td>
                         <td width="15%">&nbsp;</td>
                         <td class="ffxi-value" width="50%"><?php echo $ltrnk; ?></td>
@@ -581,14 +564,15 @@ function ffxi_preview() {
                         <td class="ffxi-value" width="50%"><?php echo $wdrnk; ?></td>
                         <td class="ffxi-value" width="5%">[<?php echo $wdlvl; ?>]</td>
                     </tr>
-                </table>            
+					<tr>
+                    	<td class="ffxi-item" width="30%">Synergy</td>
+                        <td width="15%">&nbsp;</td>
+                        <td class="ffxi-value" width="50%"><?php echo $synrnk; ?></td>
+                        <td class="ffxi-value" width="5%">[<?php echo $synlvl; ?>]</td>
+                    </tr>
+                </table>
             </div>
-			<?php 
-			if(!$ffxi_options[showws])  
-				echo "<div class='ffxi-sec' style='display: none;'>";
-			else
-				echo "<div class='ffxi-sec'>";
-			?>
+			<div id='showwstbl' class='ffxi-sec'>
                 <table border='0' cellpadding='0' cellspacing='0' width='100%'>
                     <tr>
                         <td>
@@ -669,12 +653,7 @@ function ffxi_preview() {
                     </tr>
                 </table>
             </div>
-			<?php 
-			if(!$ffxi_options[showcom])  
-				echo "<div class='ffxi-sec' style='display: none;'>";
-			else
-				echo "<div class='ffxi-sec'>";
-			?>
+			<div id='showcomtbl' class='ffxi-sec'>
                 <table border='0' cellpadding='0' cellspacing='0' width='100%'>
                     <tr>
                         <td>
@@ -780,12 +759,7 @@ function ffxi_preview() {
                     </tr>
 				</table>
 			</div>
-			<?php 
-			if(!$ffxi_options[showmag])  
-				echo "<div class='ffxi-sec' style='display: none;'>";
-			else
-				echo "<div class='ffxi-sec'>";
-			?>
+			<div id='showmagtbl' class='ffxi-sec'>
                 <table border='0' cellpadding='0' cellspacing='0' width='100%'>
                     <tr>
                         <td>
@@ -841,12 +815,7 @@ function ffxi_preview() {
 					</tr>
 				</table>
 			</div>
-			<?php 
-			if(!$ffxi_options[showmis])  
-				echo "<div class='ffxi-sec' style='display: none;'>";
-			else
-				echo "<div class='ffxi-sec'>";
-			?>
+			<div id='showmistbl' class='ffxi-sec'>
                 <table border='0' cellpadding='0' cellspacing='0' width='100%'>
                     <tr>
                         <td>
