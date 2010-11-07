@@ -19,10 +19,7 @@ FEATURES:
 * Display Basic Job Information
 * Display Advanced Job Information
 * Display Crafting Skills
-* Display Weapon Skills learned
 * Display Missions you are currently on
-* Display Combat Skills
-* Display Magic Skills
 * Any of the aforementioned information can be hidden or shown
 
 Bugs/Suggestions need to be placed here: <http://github.com/demonicpagan/FFXI-Character-Widget-for-Wordpress/issues>
@@ -40,6 +37,8 @@ FYI: I have no clue when I exactly started work on this, I'll just start the cha
 * Fixed formatting in README.md
 * Fixed more formatting in README.md and added to changelog.
 * Working on some list formating to handle my nested lists.
+* Removed some features in README that are removed from this version of the plugin.
+* Complete rewrite of plugin taking place, unknown when completion date will be.
 
 1270357200:
 
