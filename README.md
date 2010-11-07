@@ -33,6 +33,7 @@ Changelog - Dates are in Epoch time
 FYI: I have no clue when I exactly started work on this, I'll just start the changelog when I first started uploading to Github
 
 1257051600:
+
 * Initial commit to Github
 * Updated version for widget and admin backend to 3.1. Added A Shantotto Ascension to the mission admin interface. Updated the admin preview to show the three addons (weren't showing the latest two). Sidebar shows all three addons for the mission (if displayed). 
 * Forgot to change the text for where A Shantotto Ascension mission information is displayed. AMK -> ASA
