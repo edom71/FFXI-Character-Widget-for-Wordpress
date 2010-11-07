@@ -39,6 +39,7 @@ FYI: I have no clue when I exactly started work on this, I'll just start the cha
 * Changed README to a markdown format for Github and started work on adding the changelog from when the repository was created on Github.
 * Fixed formatting in README.md
 * Fixed more formatting in README.md and added to changelog.
+* Working on some list formating to handle my nested lists.
 
 1270357200:
 
@@ -47,20 +48,20 @@ FYI: I have no clue when I exactly started work on this, I'll just start the cha
 1269406800:
 
 * Servers removed from server selection list on the profile admin page:
-** Fairy
-** Kujata
-** Remora
-** Midgardsormr
-** Hades
-** Seraph
-** Garuda
-** Pandemonium
+    * Fairy
+    * Kujata
+    * Remora
+    * Midgardsormr
+    * Hades
+    * Seraph
+    * Garuda
+    * Pandemonium
 * Added automatic update to update this field in your database so you don't have to worry about doing it. For this to take effect, you must disable and reenable the plugin. I'm sorry, there is no way around this. You should be doing this on all plugin updates anyway.
 * Found a typo in admin/preview.php and corrected.
 * Found a typo in ffxi.php and corrected.
 * In admin/profile.php:
-** Changed $world to $server
-** Altered the checked and selected functions incoming variable names.
+    * Changed $world to $server
+    * Altered the checked and selected functions incoming variable names.
 
 1269234000:
 
