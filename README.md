@@ -47,6 +47,7 @@ FYI: I have no clue when I exactly started work on this, I'll just start the cha
 1269406800:
 
 * Servers removed from server selection list on the profile admin page:
+
 ** Fairy
 ** Kujata
 ** Remora
@@ -59,6 +60,7 @@ FYI: I have no clue when I exactly started work on this, I'll just start the cha
 * Found a typo in admin/preview.php and corrected.
 * Found a typo in ffxi.php and corrected.
 * In admin/profile.php:
+
 ** Changed $world to $server
 ** Altered the checked and selected functions incoming variable names.
 
