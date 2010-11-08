@@ -30,6 +30,11 @@ Changelog - Dates are in Epoch time
 ------------------------------------
 FYI: I have no clue when I exactly started work on this, I'll just start the changelog when I first started uploading to Github
 
+1289205389:
+
+* Started work on plugin adding install code and code to admin preview page.
+* Still need to write code for scraping, cron job, admin interface to save various settings.
+
 1289019600:
 
 * Updating to version 5.0 branch on GitHub. Will overwrite main branch when done.

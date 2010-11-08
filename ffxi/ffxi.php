@@ -28,11 +28,10 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 if (!defined('ABSPATH')) die("This page can only be accessed via the WP-Admin");
 
 /* Global & Misc. Variables */
-global $wpdb, $table_name, $ffxi_db_version, $ffxi_version, $ffxi_perms, $FFXI_PATH;
+global $wpdb, $table_name, $ffxi_db_version, $ffxi_version, $FFXI_PATH;
 $table_name = $wpdb->prefix."ffxistats";
 $ffxi_db_version = "5.0";
 $ffxi_version = "5.0";
-$ffxi_perms = 10;
 $FFXI_PATH = WP_PLUGIN_URL."/ffxi";
 
 /* Hooks */
@@ -71,5 +70,75 @@ function ffxi_admin_block() {
 /* Functions */
 function ffxi_install() {
 	global $wpdb, $table_name, $ffxi_db_version, $ffxi_version;
+	if (!current_user_can('activate_plugins'))
+		return;
 	require_once(dirname(__FILE__).'/install.php');
 }
+
+## Cron setup
+add_filter('cron_schedules', 'cron_ffxi_recurrences');
+add_action('ffxi_cron_scrape', 'cron_ffxi_scrape');
+
+function cron_ffxi_recurrences($schedules) {
+	$ffxi_options = get_options('ffxi_options');
+	$scrape = intval($ffxi_options['scrape'])*inval($ffxi_options['scrape_period']);
+	$schedules['ffxi_com_scrape'] = array('interval' => $scrape, 'display' => __('FFXI Linkshell Community Scrape', 'ffxi'));
+	return $schedules;
+}
+
+function cron_ffxi_scrape() {
+ // Write function to scrape linkshell community
+}
+
+## Web scraping
+function ffxi_url_get_content($url = '', $agent = $_SERVER['HTTP_USER_AGENT'], $timeout = 1) {
+ // Write code for function
+}
+
+## Scraping functions to store data to db
+function ffxi_get_meta($key, $single = true) {
+	$key = stripslashes($key);
+	global $wpdb;
+	$table = $wpdb->prefix.'ffxi_scrapemeta';
+	$meta = $wpdb->get_reslts("SELECT meta_value FROM $table WHERE meta_key = '$key'", ARRAY_A);
+	if($single) {
+		return maybe_unserialize($meta[0]['meta_value']);
+	} else {
+		return array_map('maybe_unserialize', $meta);
+	}
+}
+
+function ffxi_add_meta($key, $value, $unique = true) {
+	$key = stripslashes($key);
+	global $wpdb;
+	$table = $wpdb->prefix.'ffxi_scrapemeta';
+	if($unique && $wpdb->get_var("SELECT COUNT(*) FROM $table WHERE meta_key = '$key'")) {
+		return false;
+	} else {
+		$value = maybe_unserialize(stripslashes_deep($value));
+		$wpdb->insert($table, array(
+			'meta_key' => $key,
+			'meta_value' => $value
+		));
+		return true;
+	}
+}
+
+function ffxi_update_meta($key, $value, $oldvalue = '') {
+	$key = stripslashes($key);
+	global $wpdb;
+	$table = $wpdb->prefix.'ffxi_scrapemeta';
+	if(!$wpdb->get_var("SELECT meta_id FROM $table WHERE meta_key = '$key'"))
+		return ffxi_add_meta($key, $value);
+
+	$value = maybe_unserialize(stripslashes_deep($value));
+	$where = array('meta_key' => $key);
+	if(!emtpy($oldvalue)) {
+		$oldvalue = maybe_unserialize($oldvalue);
+		$where['meta_value'] = $oldvalue;
+	}
+	$wpdb->update($table, array('meta_value' => $value), $where);
+	return true;
+}
+
+?>
